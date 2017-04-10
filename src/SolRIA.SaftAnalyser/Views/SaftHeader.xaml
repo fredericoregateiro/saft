@@ -1,0 +1,396 @@
+﻿<local:PageBase 
+	x:Class="SolRIA.SaftAnalyser.Views.SaftHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
+	xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+	xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
+	mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300"
+    Title="SaftHeader">
+
+    <Grid>
+		<dockablz:Layout>
+			<dragablz:TabablzControl BorderThickness="0" Margin="0,-1,0,1">
+				<dragablz:TabablzControl.InterTabController>
+					<dragablz:InterTabController />
+				</dragablz:TabablzControl.InterTabController>
+				<TabItem Header="Empresa">
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<Grid ScrollViewer.CanContentScroll="True">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<Label Content="Designação comercial:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="0"/>
+							<TextBox x:Name="businessNameTextBox" Grid.Column="1" Height="24" Margin="3" Grid.Row="0" IsReadOnly="True"
+                             Text="{Binding Cabecalho.BusinessName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.BusinessName}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Registo comercial:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="1" />
+							<TextBox x:Name="companyIDTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="1" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyID, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.CompanyID}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="2"  />
+							<TextBox x:Name="companyNameTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="2" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.CompanyName}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Email:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="3"  />
+							<TextBox x:Name="emailTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="3" IsReadOnly="True"
+                             Text="{Binding Cabecalho.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Email}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Fax:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="4"  />
+							<TextBox x:Name="faxTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="4" IsReadOnly="True"
+                             Text="{Binding Cabecalho.Fax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Fax}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Sistema contabilístico:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="5"  />
+							<TextBox x:Name="taxAccountingBasisTextBox" Grid.Column="1"  Height="23" Margin="3" Grid.Row="5" IsReadOnly="True"
+                             Text="{Binding Cabecalho.TaxAccountingBasis, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.TaxAccountingBasis}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Identificação:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="6" />
+							<TextBox x:Name="taxEntityTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="6" IsReadOnly="True"
+                             Text="{Binding Cabecalho.TaxEntity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.TaxEntity}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="NIF:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="7" />
+							<TextBox x:Name="taxRegistrationNumberTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="7" IsReadOnly="True"
+                             Text="{Binding Cabecalho.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<StackPanel>
+										<TextBlock Text="{Binding Cabecalho.Tooltip.TaxRegistrationNumber}"/>
+									</StackPanel>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Telefone:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="8" />
+							<TextBox x:Name="telephoneTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="8" IsReadOnly="True"
+                             Text="{Binding Cabecalho.Telephone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Telephone}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Website:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="9"  />
+							<TextBox x:Name="websiteTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="9" IsReadOnly="True"
+                             Text="{Binding Cabecalho.Website, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Website}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Morada detalhada:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="10"  />
+							<TextBox x:Name="addressDetailTextBox" Grid.Column="1" Margin="3" Grid.Row="10" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.AddressDetail, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.AddressDetail}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Nº polícia:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="11"  />
+							<TextBox x:Name="buildingNumberTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="11" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.BuildingNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.BuildingNumber}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Localidade:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="12"  />
+							<TextBox x:Name="cityTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="12" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.City}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="País:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="13"  />
+							<TextBox x:Name="countryTextBox" Grid.Column="1" Margin="3" Grid.Row="13" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Country}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Código postal:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="14"  />
+							<TextBox x:Name="postalCodeTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="14" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.PostalCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.PostalCode}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Distrito:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="15"  />
+							<TextBox x:Name="regionTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="15" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.Region, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.Region}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Nome rua:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="16"  />
+							<TextBox x:Name="streetNameTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="16" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CompanyAddress.StreetName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.StreetName}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+						</Grid>
+					</ScrollViewer>
+				</TabItem>
+
+				<TabItem Header="Ficheiro SAFT">
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<Grid ScrollViewer.CanContentScroll="True">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<Label Content="Versão:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="0" />
+							<TextBox x:Name="auditFileVersionTextBox" Grid.Column="1" Height="24" Margin="3" Grid.Row="0" IsReadOnly="True"
+                             Text="{Binding Cabecalho.AuditFileVersion, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<StackPanel>
+										<TextBlock Text="{Binding Cabecalho.Tooltip.AuditFileVersion}"/>
+									</StackPanel>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Código moeda:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="1" />
+							<TextBox x:Name="currencyCodeTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="1" IsReadOnly="True"
+                             Text="{Binding Cabecalho.CurrencyCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.CurrencyCode}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Data criação:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="2" />
+							<TextBox x:Name="dateCreatedDatePicker" Grid.Column="1" Margin="3" Grid.Row="2" IsReadOnly="True"
+                             Text="{Binding Cabecalho.DateCreated, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.DateCreated}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Data início:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="3" />
+							<TextBox x:Name="startDateDatePicker" Grid.Column="1" Margin="3" Grid.Row="3" IsReadOnly="True"
+                             Text="{Binding Cabecalho.StartDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.StartDate}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Data fim:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="4" />
+							<TextBox x:Name="endDateDatePicker" Grid.Column="1" Margin="3" Grid.Row="4" IsReadOnly="True"
+                             Text="{Binding Cabecalho.EndDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.EndDate}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Ano fiscal:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="5" />
+							<TextBox x:Name="fiscalYearTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="5" IsReadOnly="True"
+                             Text="{Binding Cabecalho.FiscalYear, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.FiscalYear}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Comentário:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="6" />
+							<TextBox x:Name="headerCommentTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="6" IsReadOnly="True"
+                             Text="{Binding Cabecalho.HeaderComment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.HeaderComment}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+						</Grid>
+					</ScrollViewer>
+				</TabItem>
+
+				<TabItem Header="Software">
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<Grid ScrollViewer.CanContentScroll="True">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<Label Content="NIF entidade produtora do software:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="0"  />
+							<TextBox x:Name="productCompanyTaxIDTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="0" IsReadOnly="True"
+                             Text="{Binding Cabecalho.ProductCompanyTaxID, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.ProductCompanyTaxID}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Nome aplicação:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="1"  />
+							<TextBox x:Name="productIDTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="1" IsReadOnly="True"
+                             Text="{Binding Cabecalho.ProductID, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.ProductID}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Versão aplicação:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="2"  />
+							<TextBox x:Name="productVersionTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="2" IsReadOnly="True"
+                             Text="{Binding Cabecalho.ProductVersion, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.ProductVersion}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+							<Label Content="Nº certificado software:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="3"  />
+							<TextBox x:Name="softwareCertificateNumberTextBox" Grid.Column="1" Height="23" Margin="3" Grid.Row="3" IsReadOnly="True"
+                             Text="{Binding Cabecalho.SoftwareCertificateNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+								<TextBox.ToolTip>
+									<Border>
+										<StackPanel>
+											<TextBlock Text="{Binding Cabecalho.Tooltip.SoftwareCertificateNumber}"/>
+										</StackPanel>
+									</Border>
+								</TextBox.ToolTip>
+							</TextBox>
+						</Grid>
+					</ScrollViewer>
+				</TabItem>
+			</dragablz:TabablzControl>
+		</dockablz:Layout>
+	</Grid>
+</local:PageBase>

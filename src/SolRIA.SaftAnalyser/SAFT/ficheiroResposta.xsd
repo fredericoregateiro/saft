@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema elementFormDefault="qualified" xmlns="https://servicos.portaldasfinancas.gov.pt/sgdtpf/fileProcessingResult/" xmlns:ns="https://servicos.portaldasfinancas.gov.pt/sgdtpf/fileProcessingResult/" targetNamespace="https://servicos.portaldasfinancas.gov.pt/sgdtpf/fileProcessingResult/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="FileProcResult">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DocumentInfo" maxOccurs="unbounded" minOccurs="0" type="DocumentInfoType"/>
+				<xs:element name="Error" maxOccurs="unbounded" minOccurs="0" type="ErrorType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DocumentInfoType">
+		<xs:sequence>
+			<xs:element name="DocumentNumber" type="SAFPTtextTypeMandatoryMax60Car"/>
+			<xs:element name="ATDocCodeID" type="SAFPTtextTypeMandatoryMax200Car"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="ErrorMessage" type="xs:string"/>
+			<xs:element name="LineNumber" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="SAFPTtextTypeMandatoryMax60Car">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SAFPTtextTypeMandatoryMax200Car">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
