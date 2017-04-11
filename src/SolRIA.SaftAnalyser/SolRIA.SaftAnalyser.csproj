@@ -130,6 +130,7 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\SaftValidator.cs" />
     <Compile Include="Services\SimpleNavigationService.cs" />
+    <Compile Include="Services\ToolTipService.cs" />
     <Compile Include="Stocks\Stock_1_2.cs">
       <DependentUpon>Stock_1_2.xsd</DependentUpon>
     </Compile>

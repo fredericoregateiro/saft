@@ -1,5 +1,6 @@
 ﻿using SolRIA.SaftAnalyser;
 using SolRIA.SaftAnalyser.Models;
+using SolRIA.SaftAnalyser.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -2033,17 +2034,17 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 	public partial class Header : BaseData, IDataErrorInfo
 	{
-		//HeaderToolTipService tooltip;
-		//public HeaderToolTipService Tooltip
-		//{
-		//	get
-		//	{
-		//		if (tooltip == null)
-		//			tooltip = new HeaderToolTipService();
-		//		return tooltip;
-		//	}
-		//	set { tooltip = value; }
-		//}
+		HeaderToolTipService tooltip;
+		public HeaderToolTipService Tooltip
+		{
+			get
+			{
+				if (tooltip == null)
+					tooltip = new HeaderToolTipService();
+				return tooltip;
+			}
+			set { tooltip = value; }
+		}
 
 		public string Error
 		{
