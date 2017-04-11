@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 			 mc:Ignorable="d" >
 
-    <Grid Margin="5">
+    <Grid Margin="10">
 		<Grid.Resources>
 			<Style x:Key="DescriptionTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignSubheadingTextBlock}">
 				<Setter Property="Grid.Column" Value="0"/>

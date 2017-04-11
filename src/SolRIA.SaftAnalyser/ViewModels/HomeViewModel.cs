@@ -30,16 +30,16 @@ namespace SolRIA.SaftAnalyser.ViewModels
 		{
 			string file = fileService.ChooseFile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Ficheiros XMl", "(*.xml)|*.xml");
 
-			await OpenedFileInstance.OpenSaftFile(file);
+			await OpenedFileInstance.Instance.OpenSaftFile(file);
 
-			if (OpenedFileInstance.SaftFile != null)
+			if (OpenedFileInstance.Instance.SaftFile != null)
 			{
 				//validate
-				saftValidator.ValidateSaft(OpenedFileInstance.SaftFile);
+				saftValidator.ValidateSaft(OpenedFileInstance.Instance.SaftFile);
 
 				//init the view model
 				SaftValidationResumeViewModel vm = new SaftValidationResumeViewModel(navService, saftValidator);
-				vm.Init(OpenedFileInstance.SaftFile.Header);
+				vm.Init(OpenedFileInstance.Instance.SaftFile.Header);
 
 				//init the view
 				SaftValidationResume view = new SaftValidationResume

@@ -1,11 +1,6 @@
 ﻿using Prism.Mvvm;
 using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
@@ -21,7 +16,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 
 		private void NavService_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
 		{
-			Cabecalho = OpenedFileInstance.SaftFile.Header;
+			Cabecalho = OpenedFileInstance.Instance.SaftFile.Header;
 		}
 
 		private Header cabecalho;
