@@ -4,5 +4,6 @@
 	{
 		int GetSaftErrors();
 		int GetSaftHeaderErrors();
+		int GetSaftCustomersErrors();
 	}
 }

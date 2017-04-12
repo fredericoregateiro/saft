@@ -16,6 +16,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			this.saftValidator = saftValidator;
 
 			OpenHeaderCommand = new DelegateCommand(OnOpenHeader);
+			OpenCustomersCommand = new DelegateCommand(OnOpenCustomers);
 		}
 
 		public void Init(Header header)
@@ -24,6 +25,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 
 			TotalErrors = saftValidator.GetSaftErrors();
 			HeaderErrors = saftValidator.GetSaftHeaderErrors();
+			CustomersErrors = saftValidator.GetSaftCustomersErrors();
 		}
 
 		private Header header;
@@ -46,11 +48,23 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			get { return headerErrors; }
 			set { SetProperty(ref headerErrors, value); }
 		}
+		private int customersErrors;
+		public int CustomersErrors
+		{
+			get { return customersErrors; }
+			set { SetProperty(ref customersErrors, value); }
+		}
 
 		public DelegateCommand OpenHeaderCommand { get; private set; }
 		public virtual void OnOpenHeader()
 		{
 			navService.Navigate(PagesIds.SAFT_HEADER);
+		}
+
+		public DelegateCommand OpenCustomersCommand { get; private set; }
+		public virtual void OnOpenCustomers()
+		{
+			navService.Navigate(PagesIds.SAFT_CUSTOMERS);
 		}
 	}
 }

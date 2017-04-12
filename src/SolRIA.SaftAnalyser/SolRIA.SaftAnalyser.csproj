@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.186, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.186\lib\net45\Dragablz.dll</HintPath>
@@ -112,11 +115,15 @@
     </ApplicationDefinition>
     <Compile Include="PageBase.cs" />
     <Compile Include="PagesIds.cs" />
+    <Compile Include="ViewModels\SaftCustomersViewModel.cs" />
     <Compile Include="ViewModels\SaftValidationResumeViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\SaftHeaderViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaftCustomers.xaml.cs">
+      <DependentUpon>SaftCustomers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaftHeader.xaml.cs">
       <DependentUpon>SaftHeader.xaml</DependentUpon>
@@ -139,6 +146,10 @@
     <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaftCustomers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SaftHeader.xaml">
       <SubType>Designer</SubType>
@@ -170,6 +181,7 @@
     <None Include="app.config" />
     <Resource Include="Assets\database.png" />
     <Resource Include="Assets\truck-fast.png" />
+    <Resource Include="Assets\app.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -11,60 +11,79 @@
 			<Style x:Key="DescriptionTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignSubheadingTextBlock}">
 				<Setter Property="Grid.Column" Value="0"/>
 				<Setter Property="HorizontalAlignment" Value="Right"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
 				<Setter Property="Margin" Value="0,0,5,0"/>
 			</Style>
 			<Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
 				<Setter Property="IsReadOnly" Value="True"/>
 				<Setter Property="Grid.Column" Value="1"/>
+				<Setter Property="FontSize" Value="20"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
 			</Style>
 		</Grid.Resources>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
 
 		<!-- Name -->
-		<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Grid.ColumnSpan="2" Grid.Row="0">Empresa</TextBlock>
+		<GroupBox Grid.Row="0" Header="Empresa" Style="{DynamicResource MaterialDesignGroupBox}" Margin="16" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderThickness="0">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="1">Nome</TextBlock>
+				<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="2">Designação</TextBlock>
+				<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="3">NIF</TextBlock>
 
-		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="1">Nome</TextBlock>
-		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="2">Designação</TextBlock>
-		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="3">NIF</TextBlock>
+				<TextBox Text="{Binding Header.CompanyName}" Grid.Row="1"/>
+				<TextBox Text="{Binding Header.BusinessName}" Grid.Row="2"/>
+				<TextBox Text="{Binding Header.TaxRegistrationNumber}" Grid.Row="3"/>
+			</Grid>
+		</GroupBox>
 
-		<TextBox Text="{Binding Header.CompanyName}" Grid.Row="1"/>
-		<TextBox Text="{Binding Header.BusinessName}" Grid.Row="2"/>
-		<TextBox Text="{Binding Header.TaxRegistrationNumber}" Grid.Row="3"/>
+		<GroupBox Grid.Row="1" Header="Validações" Style="{DynamicResource MaterialDesignGroupBox}" Margin="16" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderThickness="0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
 
-		<Grid Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
+				<TextBlock Text="Total erros:" Grid.Column="0" Grid.Row="0"/>
+				<TextBlock Text="{Binding TotalErrors}" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="0"/>
 
-			<TextBlock Text="Total erros:" Grid.Column="0" Grid.Row="0"/>
-			<TextBlock Text="{Binding TotalErrors}" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="0"/>
+				<TextBlock Text="Erros cabeçalho:" Grid.Column="0" Grid.Row="1"/>
+				<TextBlock HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1">
+					<Hyperlink Command="{Binding OpenHeaderCommand}">
+						<TextBlock Text="{Binding HeaderErrors}"/>
+					</Hyperlink>
+				</TextBlock>
 
-			<TextBlock Text="Erros cabeçalho:" Grid.Column="0" Grid.Row="1"/>
-			<TextBlock HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1">
-				<Hyperlink Command="{Binding OpenHeaderCommand}">
-					<TextBlock Text="{Binding HeaderErrors}"/>
-				</Hyperlink>
-			</TextBlock>
+				<TextBlock Text="Erros Clientes:" Grid.Column="0" Grid.Row="2"/>
+				<TextBlock HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2">
+					<Hyperlink Command="{Binding OpenCustomersCommand}">
+						<TextBlock Text="{Binding CustomersErrors}"/>
+					</Hyperlink>
+				</TextBlock>
+			</Grid>
+		</GroupBox>
 
-		</Grid>
-
-		<StackPanel Grid.ColumnSpan="2" Grid.Row="5">
+		<StackPanel Grid.Row="2" HorizontalAlignment="Right">
 			<Button Style="{StaticResource MaterialDesignRaisedLightButton}" Margin="0 12 8 0" Width="100"
 					Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Ok</Button>
 		</StackPanel>

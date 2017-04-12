@@ -18,5 +18,10 @@ namespace SolRIA.SaftAnalyser.Services
 		{
 			return OpenedFileInstance.Instance.MensagensErro.Where(c => c.TypeofError == typeof(Header)).Count();
 		}
+
+		public int GetSaftCustomersErrors()
+		{
+			return OpenedFileInstance.Instance.MensagensErro.Where(c => c.TypeofError == typeof(Customer)).Count();
+		}
 	}
 }

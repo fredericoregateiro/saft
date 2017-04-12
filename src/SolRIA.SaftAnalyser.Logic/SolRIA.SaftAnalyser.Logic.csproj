@@ -100,6 +100,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ExtensionMethods.cs" />
     <Compile Include="Interfaces\IDataRepository.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Stocks\Stock_1_2.cs">
       <DependentUpon>Stock_1_2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRules\CustomValidationRule.cs" />
+    <Compile Include="ValidationRules\ValidationRules.cs" />
     <Compile Include="Validations.cs" />
     <Compile Include="XmlSerializer.cs" />
   </ItemGroup>
