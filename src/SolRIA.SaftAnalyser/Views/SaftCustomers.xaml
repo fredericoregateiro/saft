@@ -29,9 +29,13 @@
 							<materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
 						</Button>
 						<TextBox Grid.Column="1" Margin="5 0 0 0" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
-						 materialDesign:HintAssist.Hint="Filtro por: Nome ou Código ou Email ou Telefone ou Website ou Contacto" 
-						 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-						 MinWidth="200" VerticalAlignment="Center" />
+								 materialDesign:HintAssist.Hint="Filtro por: NIF, Nome, Código, Email, Telefone, Website ou Contacto" 
+								 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+								 MinWidth="200" VerticalAlignment="Center">
+							<TextBox.InputBindings>
+								<KeyBinding Command="{Binding SearchCommand}" Key="Enter"/>
+							</TextBox.InputBindings>
+						</TextBox>
 					</Grid>
 				</Border>
 
