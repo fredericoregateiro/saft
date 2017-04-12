@@ -6,5 +6,6 @@ namespace SolRIA.SaftAnalyser.Interfaces
 	{
 		void ShowSnackBarMessage(string message);
 		void ShowDialog(object content, DialogOpenedEventHandler openedEventHandler, DialogClosingEventHandler closingEventHandler);
+		void CloseDialog();
 	}
 }

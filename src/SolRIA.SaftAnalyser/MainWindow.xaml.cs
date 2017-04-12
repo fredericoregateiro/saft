@@ -16,7 +16,7 @@ namespace SolRIA.SaftAnalyser
 		protected override void OnInitialized(EventArgs e)
 		{
 			//init the navigation service
-			App.ConfigureUnityContainer(navigationFrame.NavigationService, MainSnackbar);
+			App.ConfigureUnityContainer(navigationFrame.NavigationService, MainSnackbar, RootDialog);
 
 			base.OnInitialized(e);
 		}

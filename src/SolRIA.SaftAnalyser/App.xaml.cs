@@ -54,7 +54,7 @@ namespace SolRIA.SaftAnalyser
 			e.Handled = true;
 		}
 
-		internal static void ConfigureUnityContainer(NavigationService navService, Snackbar mainSnackbar)
+		internal static void ConfigureUnityContainer(NavigationService navService, Snackbar mainSnackbar, DialogHost dialogHost)
 		{
 			ILogService logService = new LogService(logger);
 			INavigationService navigationService = new SimpleNavigationService(navService);
@@ -64,7 +64,7 @@ namespace SolRIA.SaftAnalyser
 
 			container.RegisterInstance<INavigationService>(navigationService);
 			container.RegisterInstance<IFileService>(new FileService());
-			container.RegisterInstance<IMessageService>(new MessageService(mainSnackbar));
+			container.RegisterInstance<IMessageService>(new MessageService(mainSnackbar, dialogHost));
 			container.RegisterInstance<ISaftValidator>(new SaftValidator());
 
 			//go to home

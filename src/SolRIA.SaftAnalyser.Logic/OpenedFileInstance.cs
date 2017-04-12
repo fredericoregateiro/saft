@@ -63,7 +63,89 @@ namespace SolRIA.SaftAnalyser
 		{
 			SaftFileName = filename;
 
+			//deserialize the xml file
 			SaftFile = await XmlSerializer.Deserialize<AuditFile>(SaftFileName);
+
+			//init custom navigation properties validations
+			if (SaftFile != null)
+			{
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.SalesInvoices != null && SaftFile.SourceDocuments.SalesInvoices.Invoice != null)
+				{
+					//add the link from the line to the correspondent invoice
+					foreach (var invoice in SaftFile.SourceDocuments.SalesInvoices.Invoice)
+					{
+						foreach (var line in invoice.Line)
+						{
+							line.InvoiceNo = invoice.InvoiceNo;
+						}
+					}
+				}
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.MovementOfGoods != null && SaftFile.SourceDocuments.MovementOfGoods.StockMovement != null)
+				{
+					//add the link from the line to the correspondent movement
+					foreach (var doc in SaftFile.SourceDocuments.MovementOfGoods.StockMovement)
+					{
+						foreach (var line in doc.Line)
+						{
+							line.DocNo = doc.DocumentNumber;
+						}
+					}
+				}
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.Payments != null && SaftFile.SourceDocuments.Payments.Payment != null)
+				{
+					//add the link from the line to the correspondent payment
+					foreach (var payment in SaftFile.SourceDocuments.Payments.Payment)
+					{
+						foreach (var line in payment.Line)
+						{
+							line.DocNo = payment.PaymentRefNo;
+						}
+					}
+				}
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.WorkingDocuments != null && SaftFile.SourceDocuments.WorkingDocuments.WorkDocument != null)
+				{
+					//add the link from the line to the correspondent invoice
+					foreach (var doc in SaftFile.SourceDocuments.WorkingDocuments.WorkDocument)
+					{
+						foreach (var line in doc.Line)
+						{
+							line.DocNo = doc.DocumentNumber;
+						}
+					}
+				}
+
+				//Do validations on fields
+				ValidateHeader(SaftFile.Header);
+				if (SaftFile.MasterFiles != null)
+				{
+					ValidateCustomers(SaftFile.MasterFiles.Customer);
+					ValidateProducts(SaftFile.MasterFiles.Product);
+					ValidateSupplier(SaftFile.MasterFiles.Supplier);
+					ValidateTax(SaftFile.MasterFiles.TaxTable);
+				}
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.SalesInvoices != null)
+					ValidateInvoices(SaftFile.SourceDocuments.SalesInvoices);
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.Payments != null)
+					ValidatePayments(SaftFile.SourceDocuments.Payments);
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.MovementOfGoods != null)
+					ValidateMovementOfGoods(SaftFile.SourceDocuments.MovementOfGoods);
+
+				if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.WorkingDocuments != null)
+					ValidateWorkDocument(SaftFile.SourceDocuments.WorkingDocuments);
+
+				//remove empty messages
+				MensagensErro.RemoveAll(c => c == null || string.IsNullOrEmpty(c.Description));
+			}
+			else
+			{
+				//show error open file
+				MensagensErro.Add(new Error { Description = "Erro ao abrir o ficheiro" });
+			}
 		}
 
 		/// <summary>
@@ -182,89 +264,6 @@ namespace SolRIA.SaftAnalyser
 			//		//convert the old to the new version
 			//		SaftFile = ConvertV1ToV3.Convert(oldSaftFile);
 			//		FileVersion = SaftFileVersion.V10101;
-			//	}
-
-			//	if (SaftFile != null)
-			//	{
-			//		//carregar o nome para o titulo
-			//		//Workspace.Instance.Title = SaftFile.Header.BusinessName;
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.SalesInvoices != null && SaftFile.SourceDocuments.SalesInvoices.Invoice != null)
-			//		{
-			//			//add the link from the line to the correspondent invoice
-			//			foreach (var invoice in SaftFile.SourceDocuments.SalesInvoices.Invoice)
-			//			{
-			//				foreach (var line in invoice.Line)
-			//				{
-			//					line.InvoiceNo = invoice.InvoiceNo;
-			//				}
-			//			}
-			//		}
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.MovementOfGoods != null && SaftFile.SourceDocuments.MovementOfGoods.StockMovement != null)
-			//		{
-			//			//add the link from the line to the correspondent movement
-			//			foreach (var doc in SaftFile.SourceDocuments.MovementOfGoods.StockMovement)
-			//			{
-			//				foreach (var line in doc.Line)
-			//				{
-			//					line.DocNo = doc.DocumentNumber;
-			//				}
-			//			}
-			//		}
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.Payments != null && SaftFile.SourceDocuments.Payments.Payment != null)
-			//		{
-			//			//add the link from the line to the correspondent payment
-			//			foreach (var payment in SaftFile.SourceDocuments.Payments.Payment)
-			//			{
-			//				foreach (var line in payment.Line)
-			//				{
-			//					line.DocNo = payment.PaymentRefNo;
-			//				}
-			//			}
-			//		}
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.WorkingDocuments != null && SaftFile.SourceDocuments.WorkingDocuments.WorkDocument != null)
-			//		{
-			//			//add the link from the line to the correspondent invoice
-			//			foreach (var doc in SaftFile.SourceDocuments.WorkingDocuments.WorkDocument)
-			//			{
-			//				foreach (var line in doc.Line)
-			//				{
-			//					line.DocNo = doc.DocumentNumber;
-			//				}
-			//			}
-			//		}
-
-			//		//Do validations on fields
-			//		ValidateHeader(SaftFile.Header);
-			//		if (SaftFile.MasterFiles != null)
-			//		{
-			//			ValidateCustomers(SaftFile.MasterFiles.Customer);
-			//			ValidateProducts(SaftFile.MasterFiles.Product);
-			//			ValidateSupplier(SaftFile.MasterFiles.Supplier);
-			//			ValidateTax(SaftFile.MasterFiles.TaxTable);
-			//		}
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.SalesInvoices != null)
-			//			ValidateInvoices(SaftFile.SourceDocuments.SalesInvoices);
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.Payments != null)
-			//			ValidatePayments(SaftFile.SourceDocuments.Payments);
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.MovementOfGoods != null)
-			//			ValidateMovementOfGoods(SaftFile.SourceDocuments.MovementOfGoods);
-
-			//		if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.WorkingDocuments != null)
-			//			ValidateWorkDocument(SaftFile.SourceDocuments.WorkingDocuments);
-
-			//		//remove empty messages
-			//		MensagensErro.RemoveAll(c => c == null || string.IsNullOrEmpty(c.Description));
-			//	}
-			//	else
-			//	{
-			//		//show error open file
-			//		MensagensErro.Add(new Error { Description = "Erro ao abrir o ficheiro" });
 			//	}
 			//}
 		}

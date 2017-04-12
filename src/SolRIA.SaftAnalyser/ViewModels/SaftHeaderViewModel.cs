@@ -7,9 +7,11 @@ namespace SolRIA.SaftAnalyser.ViewModels
 	public class SaftHeaderViewModel : BindableBase
 	{
 		INavigationService navService;
-		public SaftHeaderViewModel(INavigationService navService)
+		IMessageService messageService;
+		public SaftHeaderViewModel(INavigationService navService, IMessageService messageService)
 		{
 			this.navService = navService;
+			this.messageService = messageService;
 
 			navService.LoadCompleted += NavService_LoadCompleted;
 		}
@@ -17,6 +19,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 		private void NavService_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
 		{
 			Cabecalho = OpenedFileInstance.Instance.SaftFile.Header;
+			messageService.CloseDialog();
 		}
 
 		private Header cabecalho;

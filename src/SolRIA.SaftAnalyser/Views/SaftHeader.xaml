@@ -25,7 +25,6 @@
 				</Style>
 				<Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
 					<Setter Property="Grid.Column" Value="1"/>
-
 					<Setter Property="Margin" Value="3"/>
 					<Setter Property="IsReadOnly" Value="True"/>
 					<Setter Property="FontSize" Value="20"/>

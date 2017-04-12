@@ -34,9 +34,6 @@ namespace SolRIA.SaftAnalyser.ViewModels
 
 			if (OpenedFileInstance.Instance.SaftFile != null)
 			{
-				//validate
-				saftValidator.ValidateSaft(OpenedFileInstance.Instance.SaftFile);
-
 				//init the view model
 				SaftValidationResumeViewModel vm = new SaftValidationResumeViewModel(navService, saftValidator);
 				vm.Init(OpenedFileInstance.Instance.SaftFile.Header);

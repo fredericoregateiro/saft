@@ -8,9 +8,10 @@ namespace SolRIA.SaftAnalyser.Services
 	{
 		Snackbar mainSnackbar;
 		DialogHost dialogHost;
-		public MessageService(Snackbar mainSnackbar)
+		public MessageService(Snackbar mainSnackbar, DialogHost dialogHost)
 		{
 			this.mainSnackbar = mainSnackbar;
+			this.dialogHost = dialogHost;
 		}
 
 		public void ShowSnackBarMessage(string message)
@@ -21,6 +22,11 @@ namespace SolRIA.SaftAnalyser.Services
 		public void ShowDialog(object content, DialogOpenedEventHandler openedEventHandler, DialogClosingEventHandler closingEventHandler)
 		{
 			DialogHost.Show(content, "RootDialog", openedEventHandler, closingEventHandler);
+		}
+
+		public void CloseDialog()
+		{
+			dialogHost.IsOpen = false;
 		}
 
 		public Action<object> ClosingDialog { get; set; }

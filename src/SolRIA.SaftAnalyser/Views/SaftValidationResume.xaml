@@ -6,16 +6,19 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 			 mc:Ignorable="d" >
 
-    <Grid Margin="10">
+	<Grid Margin="10">
 		<Grid.Resources>
 			<Style x:Key="DescriptionTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignSubheadingTextBlock}">
 				<Setter Property="Grid.Column" Value="0"/>
 				<Setter Property="HorizontalAlignment" Value="Right"/>
 				<Setter Property="Margin" Value="0,0,5,0"/>
 			</Style>
+			<Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+				<Setter Property="IsReadOnly" Value="True"/>
+				<Setter Property="Grid.Column" Value="1"/>
+			</Style>
 		</Grid.Resources>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
@@ -34,10 +37,32 @@
 		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="1">Nome</TextBlock>
 		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="2">Designação</TextBlock>
 		<TextBlock Style="{StaticResource DescriptionTextBlock}" Grid.Row="3">NIF</TextBlock>
-		
-		<TextBox IsReadOnly="True" Text="{Binding Header.CompanyName}" Grid.Column="1" Grid.Row="1"/>
-		<TextBox IsReadOnly="True" Text="{Binding Header.BusinessName}" Grid.Column="1" Grid.Row="2"/>
-		<TextBox IsReadOnly="True" Text="{Binding Header.TaxRegistrationNumber}" Grid.Column="1" Grid.Row="3"/>
+
+		<TextBox Text="{Binding Header.CompanyName}" Grid.Row="1"/>
+		<TextBox Text="{Binding Header.BusinessName}" Grid.Row="2"/>
+		<TextBox Text="{Binding Header.TaxRegistrationNumber}" Grid.Row="3"/>
+
+		<Grid Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock Text="Total erros:" Grid.Column="0" Grid.Row="0"/>
+			<TextBlock Text="{Binding TotalErrors}" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="0"/>
+
+			<TextBlock Text="Erros cabeçalho:" Grid.Column="0" Grid.Row="1"/>
+			<TextBlock HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1">
+				<Hyperlink Command="{Binding OpenHeaderCommand}">
+					<TextBlock Text="{Binding HeaderErrors}"/>
+				</Hyperlink>
+			</TextBlock>
+
+		</Grid>
 
 		<StackPanel Grid.ColumnSpan="2" Grid.Row="5">
 			<Button Style="{StaticResource MaterialDesignRaisedLightButton}" Margin="0 12 8 0" Width="100"

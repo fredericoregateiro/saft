@@ -14,7 +14,7 @@
         mc:Ignorable="d"
         Title="SolRIA: Analisador SAFT">
 
-	<materialDesign:DialogHost Identifier="RootDialog" >
+	<materialDesign:DialogHost x:Name="RootDialog" Identifier="RootDialog" >
 
 		<Grid x:Name="mainGrid">
 			<Grid.RowDefinitions>

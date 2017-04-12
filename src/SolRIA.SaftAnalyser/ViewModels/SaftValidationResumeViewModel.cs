@@ -15,15 +15,15 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			this.navService = navService;
 			this.saftValidator = saftValidator;
 
-			//init commands
-			OpenInvoicesCommand = new DelegateCommand(OnOpenInvoices);
+			OpenHeaderCommand = new DelegateCommand(OnOpenHeader);
 		}
 
 		public void Init(Header header)
 		{
 			Header = header;
 
-			Errors = saftValidator.GetSaftErrors();
+			TotalErrors = saftValidator.GetSaftErrors();
+			HeaderErrors = saftValidator.GetSaftHeaderErrors();
 		}
 
 		private Header header;
@@ -33,17 +33,24 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			set { SetProperty(ref header, value); }
 		}
 
-		private int errors;
-		public int Errors
+		private int totalerrors;
+		public int TotalErrors
 		{
-			get { return errors; }
-			set { SetProperty(ref errors, value); }
+			get { return totalerrors; }
+			set { SetProperty(ref totalerrors, value); }
 		}
 
-		public DelegateCommand OpenInvoicesCommand { get; private set; }
-		public virtual void OnOpenInvoices()
+		private int headerErrors;
+		public int HeaderErrors
 		{
-			
+			get { return headerErrors; }
+			set { SetProperty(ref headerErrors, value); }
+		}
+
+		public DelegateCommand OpenHeaderCommand { get; private set; }
+		public virtual void OnOpenHeader()
+		{
+			navService.Navigate(PagesIds.SAFT_HEADER);
 		}
 	}
 }
