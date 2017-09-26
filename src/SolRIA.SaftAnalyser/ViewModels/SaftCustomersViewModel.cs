@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
-	public class SaftCustomersViewModel : BindableBase
-	{
+    public class SaftCustomersViewModel : BindableBase
+    {
 		INavigationService navService;
 		IMessageService messageService;
 		public SaftCustomersViewModel(INavigationService navService, IMessageService messageService)

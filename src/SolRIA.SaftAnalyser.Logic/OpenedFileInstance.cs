@@ -1125,7 +1125,7 @@ namespace SolRIA.SaftAnalyser
 			MensagensErro.AddRange(line.ValidateTax(SupPk: supPk, paymentNo: paymentRefNo));
 		}
 
-		internal int Operation(SourceDocumentsSalesInvoicesInvoice i, SourceDocumentsSalesInvoicesInvoiceLine l)
+		public int Operation(SourceDocumentsSalesInvoicesInvoice i, SourceDocumentsSalesInvoicesInvoiceLine l)
 		{
 			if (i.InvoiceType == InvoiceType.FT || i.InvoiceType == InvoiceType.VD || i.InvoiceType == InvoiceType.ND || i.InvoiceType == InvoiceType.FR || i.InvoiceType == InvoiceType.FS || i.InvoiceType == InvoiceType.TV || i.InvoiceType == InvoiceType.AA)
 				return l.ItemElementName == ItemChoiceType4.CreditAmount ? 1 : -1;

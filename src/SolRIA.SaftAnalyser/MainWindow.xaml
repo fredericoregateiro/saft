@@ -12,21 +12,52 @@
         TextOptions.TextRenderingMode="Auto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SolRIA: Analisador SAFT">
+        Title="SolRIA | Analisador SAFT" Loaded="Window_Loaded">
 
-	<materialDesign:DialogHost x:Name="RootDialog" Identifier="RootDialog" >
+    <materialDesign:DialogHost x:Name="RootDialog" Identifier="RootDialog" >
 
-		<Grid x:Name="mainGrid">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <ListBox x:Name="DemoItemsListBox" Margin="0 16" SelectedIndex="0"                         
+                             ItemsSource="{Binding SaftPages}"
+                             PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}" Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
 
-			<Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="navigationFrame"/>
+            <Grid x:Name="mainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-			<materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" Grid.Row="2" />
-		</Grid>
-		
-	</materialDesign:DialogHost>
+                <materialDesign:ColorZone Grid.Row="0" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2" Mode="PrimaryMid" DockPanel.Dock="Top">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                      x:Name="MenuToggleButton"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Hyperlink Click="Hyperlink_Click">
+                                <TextBlock FontSize="22">SolRIA - www.solria.pt</TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="navigationFrame"/>
+
+                <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" Grid.Row="2" />
+            </Grid>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>

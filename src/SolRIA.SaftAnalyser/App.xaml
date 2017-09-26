@@ -12,8 +12,10 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Red.xaml" />
 
 				<!-- Dragablz Material Design -->
-				<ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
+                <!-- icons -->
+                <ResourceDictionary Source="Resources/icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
 			<!-- Dragablz Material Design -->
 			<Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />

@@ -12,14 +12,14 @@
 		<WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 			<materialDesign:Card Margin="4 4 0 0" Width="230" Drop="Card_DropSAFT" AllowDrop="True">
 				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="140" />
-						<RowDefinition Height="*" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
-					<Image Source="../Assets/code-tags-check.png" Height="140" Stretch="Uniform"/>
-					<StackPanel Grid.Row="1" Margin="8 24 8 4" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Path Style="{StaticResource DataCodeTagCheckStyle}" Height="140" Width="140" Margin="5"/>
+                    <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">SAFT PT</TextBlock>
 
 						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar SAFT v1.04_01</TextBlock>
@@ -37,13 +37,13 @@
 			<materialDesign:Card Margin="4 4 0 0" Width="230" Drop="Card_DropStocks" AllowDrop="True">
 				<Grid>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="140" />
+						<RowDefinition Height="150" />
 						<RowDefinition Height="*" />
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-					<Image Source="/SolRIA.SaftAnalyser;component/Assets/database.png" Height="140" Stretch="Uniform"/>
-					<StackPanel Grid.Row="1" Margin="8 24 8 4" >
+                    <Path Style="{StaticResource DataDatabaseStyle}" Height="140" Width="140" Margin="5"/>
+                    <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Existências</TextBlock>
 
 						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar o ficheiro de existências v1.02_1</TextBlock>
@@ -60,13 +60,13 @@
 			<materialDesign:Card Margin="4 4 0 0" Width="230" Drop="Card_DropTransport" AllowDrop="True">
 				<Grid>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="140" />
+						<RowDefinition Height="150" />
 						<RowDefinition Height="*" />
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-					<Image Source="/SolRIA.SaftAnalyser;component/Assets/truck-fast.png" Height="140" Stretch="Uniform"/>
-					<StackPanel Grid.Row="1" Margin="8 24 8 4" >
+                    <Path Style="{StaticResource DataTruckFastStyle}" Height="140" Width="140" Margin="5"/>
+                    <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Transporte</TextBlock>
 
 						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar SAFT para comunicação dos documentos de transporte.</TextBlock>

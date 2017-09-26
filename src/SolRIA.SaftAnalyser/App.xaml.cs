@@ -29,14 +29,14 @@ namespace SolRIA.SaftAnalyser
 			FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
 						XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-			Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
 			//resolve the viewmodels
 			ViewModelLocationProvider.SetDefaultViewModelFactory((type) => container.Resolve(type));
 
-			App.Current.MainWindow = new MainWindow();
-			//show the main window
-			App.Current.MainWindow.Show();
+            Current.MainWindow = new MainWindow();
+            //show the main window
+            Current.MainWindow.Show();
 
 			base.OnStartup(e);
 		}
@@ -59,10 +59,10 @@ namespace SolRIA.SaftAnalyser
 			ILogService logService = new LogService(logger);
 			INavigationService navigationService = new SimpleNavigationService(navService);
 
-			container.RegisterInstance<ILogService>(logService);
+			container.RegisterInstance(logService);
 			container.RegisterInstance<IDataRepository>(new DataRepository(logService));
 
-			container.RegisterInstance<INavigationService>(navigationService);
+			container.RegisterInstance(navigationService);
 			container.RegisterInstance<IFileService>(new FileService());
 			container.RegisterInstance<IMessageService>(new MessageService(mainSnackbar, dialogHost));
 			container.RegisterInstance<ISaftValidator>(new SaftValidator());
