@@ -22,13 +22,15 @@
 					<Setter Property="Grid.Column" Value="0"/>
 					<Setter Property="HorizontalAlignment" Value="Right"/>
 					<Setter Property="Margin" Value="3"/>
-				</Style>
-				<Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
 					<Setter Property="Grid.Column" Value="1"/>
 					<Setter Property="Margin" Value="3"/>
 					<Setter Property="IsReadOnly" Value="True"/>
 					<Setter Property="FontSize" Value="20"/>
-				</Style>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
 			</ResourceDictionary>
 		</Grid.Resources>
 

@@ -1,10 +1,11 @@
-﻿<Page x:Class="SolRIA.SaftAnalyser.Views.SaftInvoices"
+﻿<local:PageBase x:Class="SolRIA.SaftAnalyser.Views.SaftInvoices"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:v="clr-namespace:SolRIA.SaftAnalyser.Logic.ValidationRules;assembly=SolRIA.SaftAnalyser.Logic"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	  xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
       mc:Ignorable="d" 
       Title="SaftInvoices">
 
@@ -124,9 +125,11 @@
                              Text="{Binding FilterInvoices, UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" TabIndex="1" VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                      ItemsSource="{Binding Source={StaticResource invoices}}" 
-                      SelectedItem="{Binding CurrentInvoice}" SelectionChanged="dataGridInvoices_SelectionChanged">
+                <DataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" TabIndex="1" 
+                          VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                          VirtualizingPanel.IsVirtualizing="True"
+                          ItemsSource="{Binding Source={StaticResource invoices}}" 
+                          SelectedItem="{Binding CurrentInvoice}" SelectionChanged="dataGridInvoices_SelectionChanged">
 
                     <DataGrid.RowValidationRules>
                         <v:InvoiceValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
@@ -136,7 +139,7 @@
                         <ControlTemplate>
                             <Grid Margin="0,-2,0,-2"
                               ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}},
-                            Path=(Validation.Errors)[0].ErrorContent}">
+                                Path=(Validation.Errors)[0].ErrorContent}">
                                 <Ellipse StrokeThickness="0" Fill="Red" 
                                      Width="{TemplateBinding FontSize}" 
                                      Height="{TemplateBinding FontSize}" />
@@ -200,17 +203,19 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                <Expander IsExpanded="True">
-                                                    <Expander.Header>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Path=Name}" />
-                                                            <TextBlock Text=" ( " />
-                                                            <TextBlock Text="{Binding Path=ItemCount}" />
-                                                            <TextBlock Text=" )"/>
-                                                        </StackPanel>
-                                                    </Expander.Header>
-                                                    <ItemsPresenter />
-                                                </Expander>
+                                                <VirtualizingStackPanel VirtualizationMode="Recycling">
+                                                    <Expander IsExpanded="True">
+                                                        <Expander.Header>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Path=Name}" />
+                                                                <TextBlock Text=" ( " />
+                                                                <TextBlock Text="{Binding Path=ItemCount}" />
+                                                                <TextBlock Text=" )"/>
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </VirtualizingStackPanel>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
@@ -282,4 +287,4 @@
 
         </Grid>
     </Grid>
-</Page>
+</local:PageBase>

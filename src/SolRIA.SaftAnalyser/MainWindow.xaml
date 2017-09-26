@@ -28,7 +28,9 @@
                              PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Name}" Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}"/>
+                                <Button Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}" 
+                                        Content="{Binding Name}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="212"
+                                        Style="{StaticResource MaterialDesignFlatButton}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

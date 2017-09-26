@@ -19,6 +19,16 @@
 
 			<!-- Dragablz Material Design -->
 			<Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
-		</ResourceDictionary>
+            
+            <!-- hyperlink style -->
+            <Style TargetType="Hyperlink">
+                <Setter Property="TextDecorations" Value="{x:Null}"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
 	</Application.Resources>
 </Application>

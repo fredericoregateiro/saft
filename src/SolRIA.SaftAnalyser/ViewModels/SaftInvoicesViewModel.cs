@@ -39,7 +39,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
             {
                 SetProperty(ref salesInvoices, value);
 
-                if (salesInvoices != null && string.IsNullOrEmpty(FilterInvoices))
+                if (salesInvoices != null && string.IsNullOrWhiteSpace(FilterInvoices))
                 {
                     DocNumberOfEntries = salesInvoices.Invoice.Length;
                     DocTotalCredit = salesInvoices.Invoice
