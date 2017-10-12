@@ -1,4 +1,6 @@
-﻿namespace SolRIA.SaftAnalyser.Views
+﻿using Syncfusion.SfSkinManager;
+
+namespace SolRIA.SaftAnalyser.Views
 {
 	/// <summary>
 	/// Interaction logic for SaftCustomers.xaml
@@ -8,11 +10,7 @@
 		public SaftCustomers()
 		{
 			InitializeComponent();
-		}
-
-		private void dataGridCustomers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-		{
-
-		}
-	}
+            SfSkinManager.SetVisualStyle(dataGridCustomers, VisualStyles.Blend);
+        }
+    }
 }

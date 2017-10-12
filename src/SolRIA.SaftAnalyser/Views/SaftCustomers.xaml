@@ -6,15 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
 	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-	xmlns:v="clr-namespace:SolRIA.SaftAnalyser.Logic.ValidationRules;assembly=SolRIA.SaftAnalyser.Logic"
+    xmlns:sf="http://schemas.syncfusion.com/wpf" 
 	mc:Ignorable="d" >
 
-	<DockPanel>
-		<DockPanel.Resources>
-			<CollectionViewSource x:Key="customers" Source="{Binding Customers, IsAsync=True}"/>
-		</DockPanel.Resources>
-
-		<materialDesign:ColorZone Mode="PrimaryLight" DockPanel.Dock="Top" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+    <DockPanel>
+        <materialDesign:ColorZone Mode="PrimaryLight" DockPanel.Dock="Top" materialDesign:ShadowAssist.ShadowDepth="Depth2">
 			<StackPanel Orientation="Horizontal">
 				<Border Background="White" MaxHeight="30" Width="500" CornerRadius="3" ToolTip="Enter to search, ignore case">
 					<Grid>
@@ -50,37 +46,27 @@
 			</StackPanel>
 		</materialDesign:ColorZone>
 
-		<DataGrid x:Name="dataGridCustomers" DockPanel.Dock="Bottom" VerticalAlignment="Stretch" TabIndex="1"
-                  ItemsSource="{Binding Source={StaticResource customers}}"
-				  AutoGenerateColumns="False" SelectionUnit="FullRow" IsReadOnly="True"
-                  SelectedItem="{Binding Customer}" SelectionChanged="dataGridCustomers_SelectionChanged">
-
-			<DataGrid.RowValidationRules>
-				<v:CustomersValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
-			</DataGrid.RowValidationRules>
-
-			<DataGrid.RowValidationErrorTemplate>
-				<ControlTemplate>
-					<Grid Margin="0,-2,0,-2"
-						  ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}},
-                            Path=(Validation.Errors)[0].ErrorContent}">
-						<materialDesign:PackIcon Kind="Alert"/>
-					</Grid>
-				</ControlTemplate>
-			</DataGrid.RowValidationErrorTemplate>
-
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="Código" Binding="{Binding CustomerID}" />
-				<DataGridTextColumn Header="Nº conta" Binding="{Binding AccountID}" />
-				<DataGridTextColumn Header="NIF" Binding="{Binding CustomerTaxID}" />
-				<DataGridTextColumn Header="Nome" Binding="{Binding CompanyName}"/>
-				<DataGridTextColumn Header="Contacto" Binding="{Binding Contact}" />
-				<DataGridTextColumn Header="Telefone" Binding="{Binding Telephone}" />
-				<DataGridTextColumn Header="Fax" Binding="{Binding Fax}" />
-				<DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-				<DataGridTextColumn Header="Website" Binding="{Binding Website}"/>
-				<DataGridTextColumn Header="Autofacturação" Binding="{Binding SelfBillingIndicator}"/>
-			</DataGrid.Columns>
-		</DataGrid>
-	</DockPanel>
+        <sf:SfDataGrid x:Name="dataGridCustomers" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                       EnableDataVirtualization="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                       ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False" AutoGenerateColumns="False"
+                       ShowRowHeader="True"
+                       ItemsSource="{Binding Customers}" 
+                       SelectedItem="{Binding Customer}">
+            <sf:SfDataGrid.GroupColumnDescriptions>
+                <sf:GroupColumnDescription ColumnName="Field" />
+            </sf:SfDataGrid.GroupColumnDescriptions>
+            <sf:SfDataGrid.Columns>
+                <sf:GridTextColumn HeaderText="Código" MappingName="CustomerID" />
+                <sf:GridTextColumn HeaderText="Nº conta" MappingName="AccountID" />
+                <sf:GridTextColumn HeaderText="NIF" MappingName="CustomerTaxID" />
+                <sf:GridTextColumn HeaderText="Nome" MappingName="CompanyName"/>
+                <sf:GridTextColumn HeaderText="Contacto" MappingName="Contact" />
+                <sf:GridTextColumn HeaderText="Telefone" MappingName="Telephone" />
+                <sf:GridTextColumn HeaderText="Fax" MappingName="Fax" />
+                <sf:GridTextColumn HeaderText="Email" MappingName="Email" />
+                <sf:GridTextColumn HeaderText="Website" MappingName="Website"/>
+                <sf:GridTextColumn HeaderText="Autofacturação" MappingName="SelfBillingIndicator"/>
+            </sf:SfDataGrid.Columns>
+        </sf:SfDataGrid>
+    </DockPanel>
 </local:PageBase>

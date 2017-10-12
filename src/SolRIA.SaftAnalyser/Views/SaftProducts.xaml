@@ -1,0 +1,44 @@
+﻿<local:PageBase 
+	x:Class="SolRIA.SaftAnalyser.Views.SaftProducts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sf="http://schemas.syncfusion.com/wpf" 
+	mc:Ignorable="d" >
+
+    <DockPanel>
+        <TextBox 
+            DockPanel.Dock="Top" Margin="3" TabIndex="2"
+            Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+            materialDesign:HintAssist.Hint="Filtro por: Código ou Grupo ou Descrição ou Código barras ou Tipo"/>
+
+        <Button DockPanel.Dock="Bottom" Width="100" Height="25" Margin="5" Padding="3" HorizontalAlignment="Right" ToolTip="Exportar para Excel"
+                Command="{Binding DoPrintCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20"/>
+                <TextBlock Text="Produtos" Padding="5,0,0,0"/>
+            </StackPanel>
+        </Button>
+
+        <sf:SfDataGrid x:Name="dataGridProducts" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                               EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                               ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False" AutoGenerateColumns="False"
+                               ShowRowHeader="True"
+                               ItemsSource="{Binding Products}" 
+                               SelectedItem="{Binding Product}">
+            <sf:SfDataGrid.GroupColumnDescriptions>
+                <sf:GroupColumnDescription ColumnName="ProductType" />
+            </sf:SfDataGrid.GroupColumnDescriptions>
+            <sf:SfDataGrid.Columns>
+                <sf:GridTextColumn HeaderText="Código" MappingName="ProductCode"/>
+                <sf:GridTextColumn HeaderText="Grupo" MappingName="ProductGroup" />
+                <sf:GridTextColumn HeaderText="Código barras" MappingName="ProductNumberCode" />
+                <sf:GridTextColumn HeaderText="Descrição" MappingName="ProductDescription" ColumnSizer="Star" />
+            </sf:SfDataGrid.Columns>
+        </sf:SfDataGrid>
+
+    </DockPanel>
+</local:PageBase>
