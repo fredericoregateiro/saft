@@ -23,6 +23,9 @@ namespace SolRIA.SaftAnalyser.ViewModels
         {
             if (OpenedFileInstance.Instance.SaftFile.SourceDocuments != null && OpenedFileInstance.Instance.SaftFile.SourceDocuments.SalesInvoices != null)
                 SalesInvoices = OpenedFileInstance.Instance.SaftFile.SourceDocuments.SalesInvoices;
+
+            FiltroDataInicio = new DateTime(DateTime.Now.Year, 1, 1);
+            FiltroDataFim = new DateTime(DateTime.Now.Year, 12, 31, 23, 59, 59);
         }
 
         SourceDocumentsSalesInvoices salesInvoices;

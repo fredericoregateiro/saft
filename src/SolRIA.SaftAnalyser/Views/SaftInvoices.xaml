@@ -1,13 +1,15 @@
-﻿<local:PageBase x:Class="SolRIA.SaftAnalyser.Views.SaftInvoices"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:v="clr-namespace:SolRIA.SaftAnalyser.Logic.ValidationRules;assembly=SolRIA.SaftAnalyser.Logic"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-	  xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
-      mc:Ignorable="d" 
-      Title="SaftInvoices">
+﻿<local:PageBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:v="clr-namespace:SolRIA.SaftAnalyser.Logic.ValidationRules;assembly=SolRIA.SaftAnalyser.Logic"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
+    xmlns:sf="http://schemas.syncfusion.com/wpf" 
+    x:Class="SolRIA.SaftAnalyser.Views.SaftInvoices"
+    mc:Ignorable="d" 
+    Title="SaftInvoices">
 
     <Grid MinWidth="600" MinHeight="600">
         <Grid.RowDefinitions>
@@ -15,13 +17,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-
         <Grid.Resources>
-            <CollectionViewSource x:Key="invoices" Source="{Binding Invoices, IsAsync=True}">
-                <CollectionViewSource.GroupDescriptions>
-                    <PropertyGroupDescription PropertyName="InvoiceType"/>
-                </CollectionViewSource.GroupDescriptions>
-            </CollectionViewSource>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
         </Grid.Resources>
 
         <GridSplitter Grid.Row="1" VerticalAlignment="Center" Background="DarkGray" ShowsPreview="True" Height="5" Width="Auto" HorizontalAlignment="Stretch" Margin="3" ResizeDirection="Rows" />
@@ -40,7 +39,7 @@
             <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="DarkGray" ShowsPreview="True" Width="5" Height="Auto" Margin="3" ResizeDirection="Columns" />
 
             <DockPanel Grid.Column="0" Grid.Row="0">
-                <GroupBox Header="Totais" DockPanel.Dock="Top">
+                <GroupBox Header="Totais" DockPanel.Dock="Top" Margin="3">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -118,36 +117,50 @@
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Documentos" DockPanel.Dock="Left" Margin="3" />
 
-                    <DatePicker SelectedDate="{Binding FiltroDataInicio}" />
-                    <DatePicker SelectedDate="{Binding FiltroDataFim}" />
-                    <TextBox Margin="3" HorizontalAlignment="Stretch"
+                    <DatePicker SelectedDate="{Binding FiltroDataInicio}" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    <DatePicker SelectedDate="{Binding FiltroDataFim}" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    <TextBox Margin="3" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.Hint="Filtro por: No ou Cliente" 
                              Text="{Binding FilterInvoices, UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" TabIndex="1" 
+                <!--<DataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" TabIndex="1" 
                           VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                          VirtualizingPanel.IsVirtualizing="True"
+                          VirtualizingPanel.IsVirtualizing="True" EnableRowVirtualization="True"
                           ItemsSource="{Binding Source={StaticResource invoices}}" 
-                          SelectedItem="{Binding CurrentInvoice}" SelectionChanged="dataGridInvoices_SelectionChanged">
+                          SelectedItem="{Binding CurrentInvoice}" SelectionChanged="dataGridInvoices_SelectionChanged" Height="169">
 
                     <DataGrid.RowValidationRules>
                         <v:InvoiceValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
                     </DataGrid.RowValidationRules>
+                </DataGrid>-->
+                <sf:SfDataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                               EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                               ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False" AutoGenerateColumns="False"
+                               ShowRowHeader="True"
+                               ItemsSource="{Binding Invoices}" 
+                               SelectedItem="{Binding CurrentInvoice}">
+                    <sf:SfDataGrid.GroupColumnDescriptions>
+                        <sf:GroupColumnDescription ColumnName="InvoiceType" />
+                    </sf:SfDataGrid.GroupColumnDescriptions>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn HeaderText="No" MappingName="InvoiceNo" HorizontalHeaderContentAlignment="Center" />
+                        <sf:GridTextColumn HeaderText="Estado" MappingName="DocumentStatus.InvoiceStatus" />
+                        <sf:GridTextColumn HeaderText="Data" MappingName="InvoiceDate" />
+                        <sf:GridTextColumn HeaderText="Data sistema" MappingName="SystemEntryDate" />
+                        <sf:GridTextColumn HeaderText="Total s/ IVA" MappingName="DocumentTotals.NetTotal" />
+                        <sf:GridTextColumn HeaderText="Total" MappingName="DocumentTotals.GrossTotal" />
+                        <sf:GridTextColumn HeaderText="Total imposto" MappingName="DocumentTotals.TaxPayable" />
+                        <sf:GridTextColumn HeaderText="Cliente" MappingName="CustomerID" />
+                        <sf:GridTextColumn HeaderText="Periodo" MappingName="Period"/>
+                        <sf:GridTextColumn HeaderText="Autofacturação" MappingName="SelfBillingIndicator" />
+                        <sf:GridTextColumn HeaderText="Transacção" MappingName="TransactionID" />
+                        <sf:GridTextColumn HeaderText="Hash" MappingName="Hash" Width="100"/>
+                        <sf:GridTextColumn HeaderText="Hash Test" MappingName="HashTest"/>
+                        <sf:GridTextColumn HeaderText="Hash Control" MappingName="HashControl" />
+                    </sf:SfDataGrid.Columns>
 
-                    <DataGrid.RowValidationErrorTemplate>
-                        <ControlTemplate>
-                            <Grid Margin="0,-2,0,-2"
-                              ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}},
-                                Path=(Validation.Errors)[0].ErrorContent}">
-                                <Ellipse StrokeThickness="0" Fill="Red" 
-                                     Width="{TemplateBinding FontSize}" 
-                                     Height="{TemplateBinding FontSize}" />
-                            </Grid>
-                        </ControlTemplate>
-                    </DataGrid.RowValidationErrorTemplate>
-
-                    <DataGrid.ContextMenu>
+                    <sf:SfDataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Mostrar Cliente" Command="{Binding ShowCustomerCommand}">
                                 <MenuItem.Icon>
@@ -170,60 +183,8 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
-                    </DataGrid.ContextMenu>
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="No" Binding="{Binding InvoiceNo}" Width="70"/>
-                        <DataGridTextColumn Header="Estado" Binding="{Binding DocumentStatus.InvoiceStatus}" Width="50" />
-                        <DataGridTextColumn Header="Data" Binding="{Binding InvoiceDate, StringFormat=d}" />
-                        <DataGridTextColumn Header="Data sistema" Binding="{Binding SystemEntryDate, StringFormat=G}" />
-                        <DataGridTextColumn Header="Total s/ IVA" Binding="{Binding DocumentTotals.NetTotal}" Width="100"/>
-                        <DataGridTextColumn Header="Total" Binding="{Binding DocumentTotals.GrossTotal}" Width="70"/>
-                        <DataGridTextColumn Header="Total imposto" Binding="{Binding DocumentTotals.TaxPayable}" Width="100"/>
-                        <DataGridTextColumn Header="Cliente" Binding="{Binding CustomerID}" Width="80"/>
-                        <DataGridTextColumn Header="Periodo" Binding="{Binding Period}" Width="75"/>
-                        <DataGridTextColumn Header="Autofacturação" Binding="{Binding SelfBillingIndicator}" Width="105"/>
-                        <DataGridTextColumn Header="Transacção" Binding="{Binding TransactionID}" />
-                        <DataGridTextColumn Header="Hash" Binding="{Binding Hash}" Width="100"/>
-                        <DataGridTextColumn Header="Hash Test" Binding="{Binding HashTest}" Width="100"/>
-                        <DataGridTextColumn Header="Hash Control" Binding="{Binding HashControl}" />
-                    </DataGrid.Columns>
-
-                    <DataGrid.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Path=Name}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                <VirtualizingStackPanel VirtualizationMode="Recycling">
-                                                    <Expander IsExpanded="True">
-                                                        <Expander.Header>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <TextBlock Text="{Binding Path=Name}" />
-                                                                <TextBlock Text=" ( " />
-                                                                <TextBlock Text="{Binding Path=ItemCount}" />
-                                                                <TextBlock Text=" )"/>
-                                                            </StackPanel>
-                                                        </Expander.Header>
-                                                        <ItemsPresenter />
-                                                    </Expander>
-                                                </VirtualizingStackPanel>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-                        </GroupStyle>
-                    </DataGrid.GroupStyle>
-                </DataGrid>
+                    </sf:SfDataGrid.ContextMenu>
+                </sf:SfDataGrid>
             </DockPanel>
 
         </Grid>
@@ -246,45 +207,41 @@
                         Text="{Binding FilterLines, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
 
-            <DataGrid x:Name="dataGridInvoiceLines" Grid.Row="1"
+            <!--<DataGrid x:Name="dataGridInvoiceLines" Grid.Row="1" VirtualizingPanel.IsVirtualizing="True"
                       ItemsSource="{Binding CurrentInvoiceLines, IsAsync=True}"
                       SelectedItem="{Binding CurrentInvoiceLine}" SelectionChanged="dataGridInvoiceLines_SelectionChanged">
                 <DataGrid.RowValidationRules>
                     <v:InvoiceLineValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
                 </DataGrid.RowValidationRules>
 
-                <DataGrid.RowValidationErrorTemplate>
-                    <ControlTemplate>
-                        <Grid Margin="0,-2,0,-2"
-                              ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}},
-                            Path=(Validation.Errors)[0].ErrorContent}">
-                            <Ellipse StrokeThickness="0" Fill="Red" 
-                                     Width="{TemplateBinding FontSize}" 
-                                     Height="{TemplateBinding FontSize}" />
-                        </Grid>
-                    </ControlTemplate>
-                </DataGrid.RowValidationErrorTemplate>
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nº linha" Binding="{Binding LineNumber}" Width="60"/>
-                    <DataGridTextColumn Header="Nº documento" Binding="{Binding InvoiceNo}"/>
-                    <DataGridTextColumn Header="Código produto" Binding="{Binding ProductCode}" />
-                    <DataGridTextColumn Header="Descrição produto" Binding="{Binding ProductDescription}" />
-                    <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
-                    <DataGridTextColumn Header="Preço unitário" Binding="{Binding UnitPrice}" />
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Item}" />
-                    <DataGridTextColumn Header="Desconto" Binding="{Binding SettlementAmount}" />
-                    <DataGridTextColumn Header="Tipo operação" Binding="{Binding ItemElementName}" />
-                    <DataGridTextColumn Header="Imposto" Binding="{Binding Tax.Item}"/>
-                    <DataGridTextColumn Header="Isenção imposto" Binding="{Binding TaxExemptionReason}" />
-                    <DataGridTextColumn Header="Referência" Binding="{Binding References[0].Reference}"/>
-                    <DataGridTextColumn Header="Razão" Binding="{Binding References[0].Reason}"/>
-                    <DataGridTextColumn Header="Unidade medida" Binding="{Binding UnitOfMeasure}" />
-                    <DataGridTextColumn Header="Data" Binding="{Binding TaxPointDate, StringFormat=d}" />
-                    <DataGridTextColumn Header="Descrição" Binding="{Binding Description}" />
-                </DataGrid.Columns>
-            </DataGrid>
-
+            </DataGrid>-->
+            <sf:SfDataGrid x:Name="dataGridInvoiceLines" Grid.Row="1" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                           EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                           ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False"
+                           ShowRowHeader="True" AutoGenerateColumns="False"
+                           ItemsSource="{Binding CurrentInvoiceLines}" 
+                           SelectedItem="{Binding CurrentInvoiceLine}">
+                <sf:SfDataGrid.Columns>
+                    <sf:GridTextColumn HeaderText="Nº linha" MappingName="LineNumber" />
+                    <sf:GridTextColumn HeaderText="Nº documento" MappingName="InvoiceNo"/>
+                    <sf:GridTextColumn HeaderText="Código produto" MappingName="ProductCode" />
+                    <sf:GridTextColumn HeaderText="Descrição produto" MappingName="ProductDescription" />
+                    <sf:GridTextColumn HeaderText="Quantidade" MappingName="Quantity"/>
+                    <sf:GridTextColumn HeaderText="Preço unitário" MappingName="UnitPrice" />
+                    <sf:GridTextColumn HeaderText="Valor" MappingName="Item" />
+                    <sf:GridTextColumn HeaderText="Desconto" MappingName="SettlementAmount" />
+                    <sf:GridTextColumn HeaderText="Tipo operação" MappingName="ItemElementName" />
+                    <sf:GridTextColumn HeaderText="Imposto" MappingName="Tax.Item"/>
+                    <sf:GridTextColumn HeaderText="Isenção imposto" MappingName="TaxExemptionReason" />
+                    <sf:GridTextColumn HeaderText="Cód. Isenção" MappingName="TaxExemptionCode" />
+                    <sf:GridTextColumn HeaderText="Referência" MappingName="References[0].Reference"/>
+                    <sf:GridTextColumn HeaderText="Razão" MappingName="References[0].Reason"/>
+                    <sf:GridTextColumn HeaderText="Unidade medida" MappingName="UnitOfMeasure" />
+                    <sf:GridTextColumn HeaderText="Data" MappingName="TaxPointDate" />
+                    <sf:GridTextColumn HeaderText="Descrição" MappingName="Description" />
+                </sf:SfDataGrid.Columns>
+            </sf:SfDataGrid>
+            
         </Grid>
     </Grid>
 </local:PageBase>

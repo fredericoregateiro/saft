@@ -105,7 +105,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 					erro = ValidateDescription(appendError: true);
 				}
 
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -328,7 +328,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		[System.Runtime.CompilerServices.IndexerName("Items")]
@@ -354,7 +354,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 					erro = ValidateItem(appendError: true);
 				}
 
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -550,7 +550,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 				{
 					erro = ValidateMovementStartTime(appendError: true);
 				}
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -861,7 +861,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 				{
 					erro = ValidateUnitPrice(appendError: true);
 				}
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -1058,7 +1058,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 				{
 					erro = ValidateSystemEntryDate(appendError: true);
 				}
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -1505,7 +1505,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 					erro = ValidateMovementStartTime(appendError: true);
 				}
 
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -1828,7 +1828,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		[System.Runtime.CompilerServices.IndexerName("Items")]
@@ -1866,7 +1866,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 					erro = ValidateTaxPointDate(appendError: true);
 				}
 
-				return erro == null ? erro.Description : null;
+				return erro?.Description;
 			}
 		}
 
@@ -2518,7 +2518,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		public string this[string columnName]
@@ -2617,7 +2617,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		public string this[string columnName]
@@ -2871,7 +2871,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		[System.Runtime.CompilerServices.IndexerName("Items")]
@@ -2986,7 +2986,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		public string this[string columnName]
@@ -3229,12 +3229,12 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		public string this[string columnName]
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 	}
 
@@ -3242,12 +3242,12 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 	{
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		public string this[string columnName]
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 	}
 
@@ -3255,13 +3255,13 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 	{
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		[System.Runtime.CompilerServices.IndexerName("Items")]
 		public string this[string columnName]
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 	}
 
@@ -3269,13 +3269,13 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 	{
 		public string Error
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 
 		[System.Runtime.CompilerServices.IndexerName("Items")]
 		public string this[string columnName]
 		{
-			get { throw new NotImplementedException(); }
+			get { return string.Empty; }
 		}
 	}
 

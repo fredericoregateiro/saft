@@ -99,10 +99,11 @@ namespace SolRIA.SaftAnalyser
             SaftPages = new ObservableCollection<SaftPage>();
             SaftPages.AddRange(new SaftPage[]
             {
-                new SaftPage{ Name = "Cabeçalho", View = "SaftHeader" },
-                new SaftPage{ Name = "Clientes", View = "SaftCustomers" },
-                new SaftPage{ Name = "Produtos", View = "SaftProducts" },
-                new SaftPage{ Name = "Doc. Faturação", View = "SaftInvoices" },
+                new SaftPage{ Name = "Cabeçalho", View = PagesIds.SAFT_HEADER },
+                new SaftPage{ Name = "Clientes", View = PagesIds.SAFT_CUSTOMERS },
+                new SaftPage{ Name = "Produtos", View = PagesIds.SAFT_PRODUCTS },
+                new SaftPage{ Name = "Doc. Faturação", View = PagesIds.SAFT_INVOICES },
+                new SaftPage{ Name = "Erros", View = PagesIds.SAFT_ERRORS },
             });
         }
 

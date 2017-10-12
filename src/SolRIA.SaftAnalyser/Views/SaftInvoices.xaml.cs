@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Syncfusion.SfSkinManager;
+using System.Windows.Controls;
 
 namespace SolRIA.SaftAnalyser.Views
 {
@@ -10,6 +11,8 @@ namespace SolRIA.SaftAnalyser.Views
         public SaftInvoices()
         {
             InitializeComponent();
+            SfSkinManager.SetVisualStyle(dataGridInvoices, VisualStyles.Blend);
+            SfSkinManager.SetVisualStyle(dataGridInvoiceLines, VisualStyles.Blend);
         }
 
         private void dataGridInvoiceLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
