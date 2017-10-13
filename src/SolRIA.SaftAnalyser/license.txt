@@ -1,0 +1,99 @@
+﻿Termos e condições
+
+Para os efeitos do presente contrato, são definidos os seguintes conceitos:
+
+    Serviço: SolRIA ERP e SolRIA Partners
+    Prestador do Serviço: SolRIA, Ideal Software Solutions, LDA
+    Utilizador: Pessoa singular ou colectiva que adquire e usa o Serviço
+    Conta: Conjunto de todos os dados pertencentes a cada utilizador ou empresa.
+
+A - Termos do Serviço
+
+Ao utilizar o site erp.solria.pt ou solriaerp.azurewebsites.net ("Serviço"), e contratar a prestação deste Serviço, o utilizador concorda em ficar vinculado aos seguintes termos e condições ("Termos do Serviço"):
+
+    A SolRIA reserva-se o direito de actualizar e alterar os Termos de Serviço periodicamente e sem aviso prévio;
+    Qualquer recurso novo que melhore ou corriga o Serviço em funcionamento, incluindo o lançamento de novas ferramentas e recursos, é sujeito às condições estabelecidas nos Termos do Serviço;
+    O uso continuado do Serviço por parte do Utilizador, após a ocorrência de quaisquer alterações operadas pela SolRIA, constitui consentimento expresso para tais mudanças;
+    O utilizador pode rever a versão mais actual dos Termos de Serviço a qualquer momento na seguinte localização: http://www.solria.pt/Termsconditions;
+    A violação de qualquer das condições estabelecidas nos Termos do Serviço confere à SolRIA o direito de encerrar a conta do utilizador infractor;
+    Embora a SolRIA proíba tais condutas e conteúdos sobre o Serviço, o utilizador entende e concorda que a SolRIA não pode ser responsabilizada pelo conteúdo inserido no Serviço, ainda que possa ser exposto a tais materiais;
+    O utilizador aceita expressamente e assume risco próprio na utilização do Serviço.
+
+B - Termos de Utilização da Conta
+
+    O Serviço só pode ser usado por utilizadores com idade igual ou superior a 18 anos;
+    Para a inscrição no Serviço o proponente na utilização do Serviço deve indicar o nome completo, um endereço de correio electrónico válido e qualquer outra informação que seja solicitada pela SolRIA;
+    O login na Conta só poderá ser usado por um utilizador - não sendo permitido a partilha de um único login por várias pessoas. O utilizador pode criar logins separados por tantos utilizadores quanto o seu plano permitir;
+    O utilizador é inteiramente responsável por manter a segurança da sua conta e senha pessoal / individual / privada. A SolRIA não pode e não será responsabilizada por qualquer perda ou dano resultante do incumprimento por parte do utilizador ou falha em cumprir com esta obrigação de segurança;
+    O utilizador é responsável por todo o conteúdo inserido e actividade que ocorra na sua conta (mesmo quando o conteúdo seja inserido por outros utilizadores com acesso à sua conta). Ao submeter ou divulgar esses conteúdos em áreas do Serviço acessíveis ao público, o utilizador declara ser o proprietário desses conteúdos eximindo a SolRIA de todas as responsabilidades fiscais ou parafiscais inerente à gestão ou emissão de qualquer documento.
+    O utilizador assume todos os riscos e custos inerentes à utilização do Serviço mas confere à SolRIA poderes para, por sua conta, proceder à emissão de documentos.
+    Uma pessoa singular ou uma pessoa colectiva podem manter uma única conta ativa;
+    O utilizador não pode usar o Serviço para quaisquer fins ilegais / ilícitos, fraudulentos ou não autorizados. O utilizador não pode, no uso do Serviço, violar qualquer lei de qualquer jurisdição (incluíndo, mas não se limitando, direitos autorais).
+
+C - Termos de Uso
+
+Os clientes / utilizadores podem navegar e consultar os dados da sua conta SolRIA ERP ("Utilização do site"). Qualquer uso do site está vinculado aos termos deste acordo e aos seguintes termos específicos:
+
+    O utilizador entende e concorda que a SolRIA não pode ser responsabilizada, nem sequer por negligência, por quaisquer danos directos, indirectos, acidentais, especiais, consequenciais ou danos exemplares, incluindo mas não limitados a: danos por lucros cessantes, boa-fé, uso indevido, dados ou outras perdas intangíveis (mesmo se a SolRIA tenha sido avisada da possibilidade de tais danos), resultantes da sua utilização do site ou produtos de terceiros que acedam a dados através do Site;
+    A SolRIA reserva-se o direito de, a qualquer momento, modificar ou descontinuar, temporariamente ou permanentemente, o seu acesso ao site (ou qualquer parte dele) com ou sem aviso prévio.
+    Na eventualidade do Serviço ser descontinuado permanentemente, a SolRIA informará o utilizador desse facto com 30 (trinta) dias de antecedência, da data de encerramento.
+    Após o encerramento da conta a SolRIA remeterá via correio electrónico, num ficheiro comprimido, ao utilizador todos os documentos, dados e informações que existirem na conta deste.
+
+D - Termos de Pagamento, Reembolso, alteração do plano subscrito
+
+    O pagamento do Serviço e Conta será efectuado preferencialmente através de transferência bancária.
+    Se o utilizador se inscrever e solicitar a prestação do Serviço com base num plano de pagamento e não proceder ao cancelamento da conta no prazo de 30 (trinta) dias, a facturação para cobrança do Serviço será emitida no 30º (trigésimo) dia posterior ao da criação inicial da sua conta.
+    Se durante o período de avaliação gratuita, OU (se durante o período de plano gratuito), o utilizador solicitar ou proceder a um Upgrade do Serviço terminará imediatamente o período de avaliação gratuita, e no mês seguinte ao da actualização, o serviço irá ser facturado.
+    O Serviço é cobrado antecipadamente, consoante a periodicidade contratada ou plano pré-pago e não é, em qualquer dos casos, reembolsável. Não haverá reembolso ou créditos por meses parciais de Serviço, restituições de upgrade / downgrade, ou reembolsos por meses não utilizados com conta aberta. Com base no princípio da igualdade não serão consideradas quaisquer excepções.
+    O utilizador é responsável pelo pagamento de quaisquer taxas, impostos ou obrigações fiscais, tributárias e direito pela utilização do Serviço.
+    No preço acordado não se incluem quaisquer taxas, impostos ou obrigações impostas pelas autoridades fiscais.
+    Se o utilizador efectuar ou pretender alterar o plano da Conta, o pagamento desse serviço será imediato e automaticamente exigível, vencendo-se no período de facturação imediatamente posterior, e poderá ser cobrado pela SolRIA através do cartão de crédito ou outro meio de pagamento aceite, nomeadamente multibanco, caso o utilizador o tenha fornecido na data de contratação do serviço ou durante a execução deste.
+    O preço do Serviço de uma determinada conta não pode ser reduzido nem será sujeito a renegociação com a SolRIA.
+
+E - Anulação e Rescisão
+
+    O utilizador é o único responsável pelo cancelamento adequado da sua conta. O cancelamento pode ser efectuado a qualquer momento através do próprio site do Serviço. O ecrã da conta apresenta um link de cancelamento simples. O envio de uma mensagem de correio electrónico ou um telefonema a solicitar o cancelamento de sua conta não é considerado procedimento adequado para o efeito e não importa o cancelamento.
+    Após o cancelamento do Serviço pelo utilizador, o conteúdo da conta será imediatamente apagado e a informação e conteúdo em memória/ guardado/ mantido não pode ser recuperado, pelo que a SolRIA aconselha vivamente ao utilizador a criação de um armazenamento de segurança ou backup.
+    Se o cancelamento do Serviço ocorrer antes do final do mês cujo pagamento já tenha sido efectuado, o cancelamento terá efeito imediato e o serviço desse mês não será cobrado novamente.
+    A SolRIA, a seu exclusivo critério, tem o direito de suspender ou encerrar a conta de qualquer utilizador e recusar todo e qualquer uso do Serviço, actual ou futuro, ou qualquer outro serviço fornecido pela SolRIA, por qualquer motivo, a qualquer momento. O fecho do Serviço importa a desactivação e/ou a supressão da Conta do utilizador ou ainda impedir o utilizador de aceder à sua Conta, bem como ao direito de confiscar todo o conteúdo da conta do utilizador.
+    A SolRIA reserva-se o direito de recusar a prestação do Serviço a qualquer pessoa singular ou colectiva por qualquer motivo, a qualquer momento
+
+F - Modificações ao Serviço e Preços
+
+    A SolRIA reserva-se o direito, de a qualquer momento, e periodicamente, modificar ou descontinuar, temporária ou permanentemente, o Serviço (ou qualquer parte dele) sem aviso prévio ou com aviso prévio de 30 (trinta) dias consecutivos no caso de se tratar de descontinuidade permanente.
+    A SolRIA poderá descontinuar o Serviço ou parte dele, sempre que detecte a necessidade de alterar ou corrigir o mesmo. O utilizador aceita expressamente que a SolRIA lhe forneça automaticamente tais correcções como parte do Serviço e eventuais quebras às mesmas inerentes.
+    Como parte do serviço, a SolRIA poderá ainda proceder a descontinuidades temporárias e modificações no Serviço, decorrentes de correcções de problemas de software, aperfeiçoamentos de funcionalidades, melhorias gerais, ou mesmo versões completamente novas do serviço, com o intuito de melhorar a prestação do mesmo, visando assim a máxima satisfação e beneficio para o utilizador. A SolRIA não será responsável para com o utilizador nem quaisquer terceiros por quaisquer danos que possam resultar ou advir de uma cessação ou suspensão da conta e/ou acesso do utilizador ao Serviço.
+    Os preços de todos os Serviços, incluindo mas não limitando à assinatura mensal para o plano de taxas de Serviço, estão sujeitas a alterações mediante aviso prévio de 30 dias. Esse aviso pode ser fornecido a qualquer momento através da publicação das alterações no site da SolRIA (www.solria.pt) ou o próprio Serviço (erp.solria.pt).
+    O utilizador ou terceiros não poderão responsabilizar contratual, extracontratual, criminal ou por qualquer outra forma a SolRIA por qualquer modificação ou alteração dos preços, suspensão ou encerramento do Serviço.
+
+G - Direitos de autor e propriedade de conteúdo
+
+    Todos os Direitos do Serviço são reservados à SolRIA. O utilizador aceita que o Serviço contém informações protegidas e confidenciais que são tuteladas pela legislação aplicável.
+    O utilizador não pode duplicar, copiar, reproduzir, redistribuir, reutilizar qualquer parte do Site, Serviço ou Conta, ou elementos visuais de design ou conceitos sem expressa autorização por escrito da SolRIA, sob pena de incorrer em responsabilidade civil e criminal.
+    A SolRIA não reivindica direitos de propriedade intelectual sobre o material e conteúdo, materiais e perfil que o utilizador inserir no Serviço.
+
+H - Condições Gerais
+
+    O utilizador assume risco próprio no uso do Serviço. O Serviço é prestado "tal como está" e "conforme disponível".
+    O apoio técnico é fornecido via correio electrónico, aos utilizadores e titulares de contas pagas e ativas que não se encontrem em mora ou incumprimento nos pagamentos.
+    A SolRIA utiliza parceiros para o alojamento e fornecedores para provisionar o hardware, software, redes, armazenamento e tecnologias relacionadas, necessários para executar o site.
+    O utilizador não pode modificar ou adaptar o Site do Serviço.
+    O utilizador não pode usar a imagem, conteúdos e informações do site do Serviço, nem a modificar um outro site, de modo a implicar falsamente que está associado com o Site da SolRIA, ou qualquer outro serviço prestado pela SolRIA.
+    O utilizador não pode reproduzir, duplicar, copiar, vender, revender ou explorar qualquer parte do Site, uso do Site, ou o acesso ao Site sem a permissão expressa por escrito pela SolRIA sob pena de incorrer em responsabilidade civil e criminal.
+    O utilizador não deve fazer upload, inserir, alojar, ou transmitir e-mail, SMS, ou mensagens "spam" não solicitadas.
+    O serviço é prestado em linha, pelo que a SolRIA não se responsabilizar por qualquer falha de conectividade e inerente impossibilidade da sua utilização.
+    O utilizador deve adoptar medidas preventivas e dotar-se de garantias de segurança, de forma a deve transmitir qualquer vírus ou worms ou qualquer código de natureza destrutiva.
+    A SolRIA não garante que:
+        o Serviço irá satisfazer suas necessidades específicas
+        o serviço será ininterrupto, atempado, seguro ou livre de erros
+        os resultados que podem ser obtidos com a utilização do Serviço serão exactos ou confiáveis
+        a qualidade dos produtos, serviços, informações ou outros materiais adquiridos ou obtidos pelo utilizador através do Serviço irá satisfazer suas expectativas
+        quaisquer erros no serviço serão corrigidos.
+    O utilizador expressamente entende e concorda que SolRIA não será responsável por quaisquer danos directos, indirectos, acidentais, especiais, consequenciais ou exemplares, incluindo mas não limitados a: danos por lucros cessantes; boa-fé; uso; dados ou outras perdas intangíveis (mesmo se a SolRIA tenha sido avisada da possibilidade de tais danos), resultantes:
+        a utilização ou a incapacidade de utilizar o serviço
+        o custo de aquisição de bens e serviços de substituição resultante de quaisquer bens, dados, informações ou serviços adquiridos ou obtidos ou mensagens recebidas ou operações contratadas ou através do serviço
+        acesso não autorizado ou alteração de suas transmissões ou dados
+        declarações ou condutas de terceiros sobre o Serviço
+        ou qualquer outro questões relativas ao Serviço.
+
+Dúvidas e questões sobre os Termos de Serviço devem ser enviadas para suporte@solria.pt.
