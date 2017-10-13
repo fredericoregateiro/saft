@@ -119,21 +119,30 @@
 
                     <DatePicker SelectedDate="{Binding FiltroDataInicio}" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
                     <DatePicker SelectedDate="{Binding FiltroDataFim}" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
-                    <TextBox Margin="3" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignTextBox}"
+                    
+                    <Border Margin="3" Background="White" MaxHeight="30" HorizontalAlignment="Stretch" CornerRadius="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}" 
+                                Command="{Binding SearchCommand}" x:Name="SearchButton"
+                                Height="24" Width="24">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox Grid.Column="1" Margin="5 0 0 0" Text="{Binding FilterInvoices, UpdateSourceTrigger=PropertyChanged}"
                              materialDesign:HintAssist.Hint="Filtro por: No ou Cliente" 
-                             Text="{Binding FilterInvoices, UpdateSourceTrigger=PropertyChanged}"/>
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                             MinWidth="200" VerticalAlignment="Center">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Command="{Binding SearchCommand}" Key="Enter"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                        </Grid>
+                    </Border>
                 </DockPanel>
 
-                <!--<DataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" TabIndex="1" 
-                          VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                          VirtualizingPanel.IsVirtualizing="True" EnableRowVirtualization="True"
-                          ItemsSource="{Binding Source={StaticResource invoices}}" 
-                          SelectedItem="{Binding CurrentInvoice}" SelectionChanged="dataGridInvoices_SelectionChanged" Height="169">
-
-                    <DataGrid.RowValidationRules>
-                        <v:InvoiceValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
-                    </DataGrid.RowValidationRules>
-                </DataGrid>-->
                 <sf:SfDataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
                                EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
                                ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False" AutoGenerateColumns="False"
@@ -201,20 +210,25 @@
 
                 <Label Content="Linhas" DockPanel.Dock="Left" Margin="3" />
 
-                <TextBox 
-                        DockPanel.Dock="Right" Margin="3" TabIndex="2"
-                        materialDesign:HintAssist.Hint="Filtro por: Descrição produto ou Código produto ou Descrição" HorizontalAlignment="Stretch"
-                        Text="{Binding FilterLines, UpdateSourceTrigger=PropertyChanged}"/>
+                <Border Margin="3" Background="White" MaxHeight="30" HorizontalAlignment="Stretch" CornerRadius="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{DynamicResource MaterialDesignToolButton}" 
+                                Height="24" Width="24">
+                            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                        </Button>
+                        <TextBox Grid.Column="1" Margin="5 0 0 0" Text="{Binding FilterLines, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Filtro por: Descrição produto ou Código produto ou Descrição" 
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                             MinWidth="200" VerticalAlignment="Center">
+                        </TextBox>
+                    </Grid>
+                </Border>
             </DockPanel>
 
-            <!--<DataGrid x:Name="dataGridInvoiceLines" Grid.Row="1" VirtualizingPanel.IsVirtualizing="True"
-                      ItemsSource="{Binding CurrentInvoiceLines, IsAsync=True}"
-                      SelectedItem="{Binding CurrentInvoiceLine}" SelectionChanged="dataGridInvoiceLines_SelectionChanged">
-                <DataGrid.RowValidationRules>
-                    <v:InvoiceLineValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
-                </DataGrid.RowValidationRules>
-
-            </DataGrid>-->
             <sf:SfDataGrid x:Name="dataGridInvoiceLines" Grid.Row="1" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
                            EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
                            ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False"
@@ -241,7 +255,7 @@
                     <sf:GridTextColumn HeaderText="Descrição" MappingName="Description" />
                 </sf:SfDataGrid.Columns>
             </sf:SfDataGrid>
-            
+
         </Grid>
     </Grid>
 </local:PageBase>

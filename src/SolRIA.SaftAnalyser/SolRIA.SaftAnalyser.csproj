@@ -125,6 +125,7 @@
     </ApplicationDefinition>
     <Compile Include="PageBase.cs" />
     <Compile Include="PagesIds.cs" />
+    <Compile Include="ViewModels\SaftTaxesViewModel.cs" />
     <Compile Include="ViewModels\SaftProductsViewModel.cs" />
     <Compile Include="ViewModels\SaftCustomersViewModel.cs" />
     <Compile Include="ViewModels\SaftErrorsViewModel.cs" />
@@ -134,6 +135,9 @@
     <Compile Include="ViewModels\SaftHeaderViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaftTaxes.xaml.cs">
+      <DependentUpon>SaftTaxes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaftProducts.xaml.cs">
       <DependentUpon>SaftProducts.xaml</DependentUpon>
@@ -172,6 +176,10 @@
     <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaftTaxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SaftProducts.xaml">
       <Generator>MSBuild:Compile</Generator>
