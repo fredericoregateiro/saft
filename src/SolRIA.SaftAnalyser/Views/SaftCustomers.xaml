@@ -20,7 +20,6 @@
 						</Grid.ColumnDefinitions>
 						<Button Style="{DynamicResource MaterialDesignToolButton}" 
                                 Command="{Binding SearchCommand}" x:Name="SearchButton"
-                                CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
                                 Height="24" Width="24">
 							<materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
 						</Button>
@@ -50,11 +49,7 @@
                        EnableDataVirtualization="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
                        ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False" AutoGenerateColumns="False"
                        ShowRowHeader="True"
-                       ItemsSource="{Binding Customers}" 
-                       SelectedItem="{Binding Customer}">
-            <sf:SfDataGrid.GroupColumnDescriptions>
-                <sf:GroupColumnDescription ColumnName="Field" />
-            </sf:SfDataGrid.GroupColumnDescriptions>
+                       ItemsSource="{Binding Customers}">
             <sf:SfDataGrid.Columns>
                 <sf:GridTextColumn HeaderText="Código" MappingName="CustomerID" />
                 <sf:GridTextColumn HeaderText="Nº conta" MappingName="AccountID" />
