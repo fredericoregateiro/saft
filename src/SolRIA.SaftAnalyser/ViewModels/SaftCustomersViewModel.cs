@@ -45,7 +45,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 		public string Filter
 		{
 			get { return filter; }
-			set { SetProperty(ref filter, value); }
+			set { SetProperty(ref filter, value, FilterCustomers); }
 		}
 
 		//SearchCommand

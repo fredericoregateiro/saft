@@ -53,23 +53,23 @@ namespace SolRIA.SaftAnalyser.ViewModels
         string filter;
         public string Filter
         {
-            get { return filter; }
-            set
-            {
-                SetProperty(ref filter, value);
+            get => filter;
+            set => SetProperty(ref filter, value, FilterProducts);
+        }
 
-                if (string.IsNullOrEmpty(filter))
-                    Products = productsBack;
-                else
-                {
-                    Products = (from c in productsBack
-                                where !string.IsNullOrEmpty(c.ProductCode) && c.ProductCode.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                !string.IsNullOrEmpty(c.ProductDescription) && c.ProductDescription.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                !string.IsNullOrEmpty(c.ProductGroup) && c.ProductGroup.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                !string.IsNullOrEmpty(c.ProductNumberCode) && c.ProductNumberCode.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                c.ProductType.ToString().IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0
-                                select c).ToArray();
-                }
+        private void FilterProducts()
+        {
+            if (string.IsNullOrEmpty(filter))
+                Products = productsBack;
+            else
+            {
+                Products = (from c in productsBack
+                            where !string.IsNullOrEmpty(c.ProductCode) && c.ProductCode.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            !string.IsNullOrEmpty(c.ProductDescription) && c.ProductDescription.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            !string.IsNullOrEmpty(c.ProductGroup) && c.ProductGroup.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            !string.IsNullOrEmpty(c.ProductNumberCode) && c.ProductNumberCode.IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            c.ProductType.ToString().IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0
+                            select c).ToArray();
             }
         }
 
