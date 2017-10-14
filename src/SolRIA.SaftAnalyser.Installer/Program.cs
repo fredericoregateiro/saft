@@ -52,7 +52,7 @@ namespace SolRIA.SaftAnalyser.Installer
             project.OutFileName = "SolRIA.SaftAnalyser";
             project.ProductId = Guid.NewGuid();
             project.UpgradeCode = new Guid("{9ADF9E4F-BEC5-4875-8E93-6287751C0503}");
-            project.Version = Version.Parse("17.10.13.0");
+            project.Version = Version.Parse("17.10.14.0");
             project.LicenceFile = System.IO.Path.Combine(baseFolderPath, "license.rtf");
 
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;

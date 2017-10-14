@@ -18,7 +18,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataCodeTagCheckStyle}" Height="140" Width="140" Margin="5"/>
+                    <Path Style="{StaticResource DataCodeTagCheckStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">SAFT PT</TextBlock>
 
@@ -42,7 +42,7 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataDatabaseStyle}" Height="140" Width="140" Margin="5"/>
+                    <Path Style="{StaticResource DataDatabaseStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Existências</TextBlock>
 
@@ -65,7 +65,7 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataTruckFastStyle}" Height="140" Width="140" Margin="5"/>
+                    <Path Style="{StaticResource DataTruckFastStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
 						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Transporte</TextBlock>
 

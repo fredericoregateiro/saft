@@ -35,11 +35,10 @@
 				</Border>
 
 				<Button DockPanel.Dock="Bottom" Width="100" Height="25" Margin="5" Padding="3" HorizontalAlignment="Right" ToolTip="Exportar para Excel"
-						Command="{Binding DoPrintCommand}"
-						CommandParameter="{Binding ElementName=dataGridCustomers}">
+						Command="{Binding DoPrintCommand}" Style="{StaticResource MaterialDesignFlatButton}">
 					<StackPanel Orientation="Horizontal">
-						<materialDesign:PackIcon Kind="FileExcel" />
-						<TextBlock Text="Clientes" Padding="5,0,0,0"/>
+                        <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20" Fill="Black"/>
+                        <TextBlock Text="Clientes" Padding="5,0,0,0" Foreground="Black"/>
 					</StackPanel>
 				</Button>
 			</StackPanel>

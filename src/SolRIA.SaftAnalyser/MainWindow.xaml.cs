@@ -100,6 +100,7 @@ namespace SolRIA.SaftAnalyser
             {
                 new SaftPage{ Name = "Cabeçalho", View = PagesIds.SAFT_HEADER },
                 new SaftPage{ Name = "Clientes", View = PagesIds.SAFT_CUSTOMERS },
+                new SaftPage{ Name = "Fornecedores", View = PagesIds.SAFT_SUPPLIERS },
                 new SaftPage{ Name = "Produtos", View = PagesIds.SAFT_PRODUCTS },
                 new SaftPage{ Name = "Impostos", View = PagesIds.SAFT_TAXES },
                 new SaftPage{ Name = "Doc. Faturação", View = PagesIds.SAFT_INVOICES },
