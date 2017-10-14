@@ -1,0 +1,141 @@
+﻿<local:PageBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SolRIA.SaftAnalyser"
+    xmlns:sf="http://schemas.syncfusion.com/wpf" 
+    x:Class="SolRIA.SaftAnalyser.Views.SaftInvoicesSummary"
+    mc:Ignorable="d" >
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid ScrollViewer.CanContentScroll="True" >
+            <Grid.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTitleTextBlock}">
+                    <Setter Property="Grid.Column" Value="0"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="Margin" Value="3"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignRadioButton}">
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="250"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Total dos documentos -->
+            <GroupBox Header="Totais" Grid.Row="0" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Total débitos:" Margin="3"/>
+                    <TextBlock Text="{Binding TotalDebit, StringFormat=\{0:C\}}" Margin="3"/>
+                    <TextBlock Text="Total créditos:" Margin="3"/>
+                    <TextBlock Text="{Binding TotalCredit, StringFormat=\{0:C\}}" Margin="3"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- exportar excel -->
+            <GroupBox Header="Exportar" Grid.Row="0" Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="150" Height="25" Margin="5,0" Padding="3" ToolTip="Exportar para Excel" DockPanel.Dock="Bottom" 
+                        Command="{Binding DoExportDocumentsCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20"/>
+                            <TextBlock Text="Documentos" Padding="5,0,0,0" Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="150" Height="25" Margin="5,0" Padding="3" ToolTip="Exportar para Excel" DockPanel.Dock="Bottom" 
+                        Command="{Binding DoExportLinesCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20"/>
+                            <TextBlock Text="Linhas" Padding="5,0,0,0" Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="150" Height="25" Margin="5,0" Padding="3" ToolTip="Exportar para Excel"
+                        Command="{Binding DoExportTaxesCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20"/>
+                            <TextBlock Text="Impostos" Padding="5,0,0,0" Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Total dos documentos -->
+            <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <RadioButton Content="Documentos por mês" GroupName="documentos" IsChecked="{Binding AgruparDocumentosMes}" Margin="3" FontSize="12" />
+                    <RadioButton Content="Documentos por dia" GroupName="documentos" IsChecked="{Binding AgruparDocumentosDia}" Margin="3" FontSize="12" />
+                </StackPanel>
+
+                <sf:SfDataGrid x:Name="dataGridInvoices" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                       EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                       ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False"
+                       ShowRowHeader="True" AutoGenerateColumns="False"
+                       ItemsSource="{Binding Invoices}" >
+                    <sf:SfDataGrid.GroupColumnDescriptions>
+                        <sf:GroupColumnDescription ColumnName="Tipo" />
+                    </sf:SfDataGrid.GroupColumnDescriptions>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn HeaderText="Tipo" MappingName="Tipo" />
+                        <sf:GridDateTimeColumn HeaderText="Data" MappingName="Data" />
+                        <sf:GridNumericColumn HeaderText="Total s/ IVA" MappingName="Incidencia" Width="100"/>
+                        <sf:GridNumericColumn HeaderText="Total" MappingName="Total" Width="70"/>
+                        <sf:GridNumericColumn HeaderText="Total imposto" MappingName="Imposto" Width="100"/>
+                    </sf:SfDataGrid.Columns>
+                </sf:SfDataGrid>
+            </DockPanel>
+
+            <!-- Total das linhas -->
+            <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <RadioButton Content="Linhas por código" GroupName="linhas" IsChecked="{Binding AgruparLinhasPorCodigo}" Margin="3" FontSize="12" />
+                    <RadioButton Content="Linhas por descrição" GroupName="linhas" IsChecked="{Binding AgruparLinhasPorDescricao}" Margin="3" FontSize="12" />
+                </StackPanel>
+
+                <sf:SfDataGrid x:Name="dataGridInvoiceLines" DockPanel.Dock="Bottom" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                       EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                       ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False"
+                       ShowRowHeader="True" AutoGenerateColumns="False"
+                       ItemsSource="{Binding InvoiceLines}" >
+                    <sf:SfDataGrid.GroupColumnDescriptions>
+                        <sf:GroupColumnDescription ColumnName="Tipo" />
+                    </sf:SfDataGrid.GroupColumnDescriptions>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn HeaderText="Tipo" MappingName="Tipo" />
+                        <sf:GridTextColumn HeaderText="Código" MappingName="ProdutoCodigo" ColumnSizer="Star"/>
+                        <sf:GridTextColumn HeaderText="Nome" MappingName="ProdutoNome" ColumnSizer="Star"/>
+                        <sf:GridNumericColumn HeaderText="Total s/ IVA" MappingName="Incidencia" Width="90"/>
+                        <sf:GridNumericColumn HeaderText="Imposto" MappingName="TaxaImposto" />
+                    </sf:SfDataGrid.Columns>
+                </sf:SfDataGrid>
+            </DockPanel>
+
+            <!-- Taxes -->
+            <sf:SfDataGrid x:Name="dataGridTaxes" Grid.Row="3" Grid.ColumnSpan="2" AllowEditing="False" AllowGrouping="True" GridValidationMode="InView"
+                       EnableDataVirtualization="True" HorizontalAlignment="Stretch" GroupCaptionTextFormat=" {Key} "
+                       ShowGroupDropArea="True" AutoExpandGroups="True" IsGroupDropAreaExpanded="False"
+                       ShowRowHeader="True" AutoGenerateColumns="False"
+                       ItemsSource="{Binding Resumo}" >
+                <sf:SfDataGrid.GroupColumnDescriptions>
+                    <sf:GroupColumnDescription ColumnName="Codigo" />
+                </sf:SfDataGrid.GroupColumnDescriptions>
+                <sf:SfDataGrid.Columns>
+                    <sf:GridTextColumn HeaderText="Codigo" MappingName="Codigo" />
+                    <sf:GridTextColumn HeaderText="Taxa" MappingName="Taxa" />
+                    <sf:GridNumericColumn HeaderText="Incidencia" MappingName="Incidencia" />
+                    <sf:GridNumericColumn HeaderText="Valor" MappingName="Valor" />
+                </sf:SfDataGrid.Columns>
+            </sf:SfDataGrid>
+        </Grid>
+    </ScrollViewer>
+
+</local:PageBase>

@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SolRIA | Analisador SAFT" Loaded="Window_Loaded">
+        Title="SolRIA | Analisador SAFT" Loaded="Window_Loaded" WindowState="Maximized">
 
     <materialDesign:DialogHost x:Name="RootDialog" Identifier="RootDialog" >
 

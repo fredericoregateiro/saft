@@ -52,7 +52,7 @@
             <sf:SfDataGrid.Columns>
                 <sf:GridTextColumn HeaderText="País ou região imposto" MappingName="TaxCountryRegion" />
                 <sf:GridTextColumn HeaderText="Código" MappingName="TaxCode" />
-                <sf:GridTextColumn HeaderText="Descrição" MappingName="Description" />
+                <sf:GridTextColumn HeaderText="Descrição" MappingName="Description" ColumnSizer="Star"/>
                 <sf:GridTextColumn HeaderText="Data fim" MappingName="TaxExpirationDate" />
                 <sf:GridTextColumn HeaderText="Valor" MappingName="Item" />
                 <sf:GridTextColumn HeaderText="Tipo" MappingName="ItemElementName" />

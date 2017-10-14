@@ -48,7 +48,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			}
 			else
 			{
-				messageService.ShowSnackBarMessage("Não foi possível abrir o ficheiro selecionado.");
+				messageService.ShowSnackBarMessage("Não foi possível abrir o ficheiro seleccionado.");
 			}
 		}
 

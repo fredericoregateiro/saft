@@ -8,6 +8,7 @@
 		public const string SAFT_PRODUCTS = "SaftProducts";
 		public const string SAFT_TAXES = "SaftTaxes";
         public const string SAFT_INVOICES = "SaftInvoices";
+        public const string SAFT_INVOICES_SUMMARY = "SaftInvoicesSummary";
         public const string SAFT_ERRORS = "SaftErrors";
     }
 }

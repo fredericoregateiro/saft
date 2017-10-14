@@ -96,23 +96,27 @@ namespace SolRIA.SaftAnalyser
 
             NavigateCommand = new DelegateCommand<SaftPage>(OnNavigate);
 
-            SaftPages = new ObservableCollection<SaftPage>();
-            SaftPages.AddRange(new SaftPage[]
+            allPages = new SaftPage[]
             {
                 new SaftPage{ Name = "Cabeçalho", View = PagesIds.SAFT_HEADER },
                 new SaftPage{ Name = "Clientes", View = PagesIds.SAFT_CUSTOMERS },
                 new SaftPage{ Name = "Produtos", View = PagesIds.SAFT_PRODUCTS },
                 new SaftPage{ Name = "Impostos", View = PagesIds.SAFT_TAXES },
                 new SaftPage{ Name = "Doc. Faturação", View = PagesIds.SAFT_INVOICES },
+                new SaftPage{ Name = "Resumo Faturação", View = PagesIds.SAFT_INVOICES_SUMMARY },
                 new SaftPage{ Name = "Erros", View = PagesIds.SAFT_ERRORS },
-            });
+            };
+
+            SaftPages = new ObservableCollection<SaftPage>();
+            SaftPages.AddRange(allPages);
         }
+        SaftPage[] allPages;
 
         private ObservableCollection<SaftPage> saftPages;
         public ObservableCollection<SaftPage> SaftPages
         {
-            get { return saftPages; }
-            set { SetProperty(ref saftPages, value); }
+            get => saftPages;
+            set => SetProperty(ref saftPages, value);
         }
 
         public DelegateCommand<SaftPage> NavigateCommand { get; private set; }
