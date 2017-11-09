@@ -30,12 +30,13 @@
                     </Grid>
                 </Border>
 
-                <Button Width="120" Height="25" Margin="5" Padding="3" HorizontalAlignment="Right" ToolTip="Exportar para Excel"
+                <Button Margin="2" Padding="3" HorizontalAlignment="Right" ToolTip="Exportar para Excel"
                         Command="{Binding DoPrintCommand}" Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Style="{StaticResource DataExcelStyle}" Width="20" Height="20" Fill="Black"/>
-                        <TextBlock Text="Fornecedores" Padding="5,0,0,0" Foreground="Black"/>
-                    </StackPanel>
+                    <Path Style="{StaticResource DataExcelStyle}" Width="22" Height="22" Fill="Black" VerticalAlignment="Center"/>
+                </Button>
+                <Button Margin="2" Padding="3" HorizontalAlignment="Right" ToolTip="Gerar script SolRIA POS"
+                        Command="{Binding GenerateScriptCommand}" Style="{StaticResource MaterialDesignFlatButton}">
+                    <Path Style="{StaticResource DataDatabaseStyle}" Width="22" Height="22" Fill="Black" VerticalAlignment="Center"/>
                 </Button>
             </StackPanel>
         </materialDesign:ColorZone>

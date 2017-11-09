@@ -1,5 +1,7 @@
 ﻿using SolRIA.SaftAnalyser.Interfaces;
+using System;
 using System.IO;
+using System.Text;
 
 namespace SolRIA.SaftAnalyser.Services
 {
@@ -25,5 +27,28 @@ namespace SolRIA.SaftAnalyser.Services
 
 			return string.Empty;
 		}
-	}
+
+        public string[] ReadFileLines(string fileName)
+        {
+            if (File.Exists(fileName))
+                return File.ReadAllLines(fileName);
+            else
+                return null;
+        }
+
+        public string GetLocalFileName(string name)
+        {
+            return Path.Combine(Environment.CurrentDirectory, name);
+        }
+
+        public string GenerateRandonFileName(string extension = ".xlsx")
+        {
+            return Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + extension);
+        }
+
+        public void WriteToFile(string fileName, string content)
+        {
+            File.WriteAllText(fileName, content, Encoding.UTF8);
+        }
+    }
 }

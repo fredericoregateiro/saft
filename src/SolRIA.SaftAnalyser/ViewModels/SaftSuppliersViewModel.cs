@@ -4,11 +4,13 @@ using Prism.Commands;
 using Prism.Mvvm;
 using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
+using SolRIA.SaftAnalyser.Logic.Models;
 using System;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
@@ -16,12 +18,15 @@ namespace SolRIA.SaftAnalyser.ViewModels
     {
         INavigationService navService;
         IMessageService messageService;
-        public SaftSuppliersViewModel(INavigationService navService, IMessageService messageService)
+        IFileService fileService;
+        public SaftSuppliersViewModel(INavigationService navService, IMessageService messageService, IFileService fileService)
         {
             this.navService = navService;
             this.messageService = messageService;
+            this.fileService = fileService;
 
             DoPrintCommand = new DelegateCommand(OnPrint);
+            GenerateScriptCommand = new DelegateCommand(OnGenerateScript);
 
             navService.LoadCompleted += NavService_LoadCompleted;
         }
@@ -36,7 +41,6 @@ namespace SolRIA.SaftAnalyser.ViewModels
         }
 
         Supplier[] suppliersBack;
-
         Supplier[] suppliers;
         public Supplier[] Suppliers
         {
@@ -68,6 +72,58 @@ namespace SolRIA.SaftAnalyser.ViewModels
                                 select c).ToArray();
                 }
             }
+        }
+
+        public DelegateCommand GenerateScriptCommand { get; private set; }
+        private void OnGenerateScript()
+        {
+            //read the zip codes if the local file exists
+            ZipCode[] zipcodes = ZipCode.ParseCsv(fileService.ReadFileLines(fileService.GetLocalFileName("zipcodes.csv")));
+            int supplierZipCodeId = 1;
+
+            int idsupplier = 10;
+            int idAddress = 1000;
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("--Script gerado para SolRIA POS");
+            sql.AppendLine("--Este script precisa de ser editado por um funcionário da SolRIA");
+            foreach (var supplier in Suppliers)
+            {
+                //find the customer address zip code
+                if (zipcodes != null && zipcodes.Length > 0 && supplier.BillingAddress != null && string.IsNullOrWhiteSpace(supplier.BillingAddress.PostalCode) == false)
+                {
+                    var postalCode = supplier.BillingAddress.PostalCode.Split('-');
+                    if (postalCode != null && postalCode.Length == 2)
+                    {
+                        var supplierZipCodes = zipcodes.Where(c => c.Code == supplier.BillingAddress.PostalCode);
+
+                        if (supplierZipCodes == null || supplierZipCodes.Count() == 0)
+                            supplierZipCodeId = 1;
+                        else if (supplierZipCodes.Count() == 1)
+                            supplierZipCodeId = supplierZipCodes.First().Id;
+                        else
+                        {
+                            sql.AppendLine("--multiple zip codes: " + string.Join(",", supplierZipCodes.Select(z => z.Id)));
+                            supplierZipCodeId = 1;
+                        }
+                    }
+                }
+                else
+                    supplierZipCodeId = 1;
+
+                sql.AppendLine(
+                    $"INSERT INTO Address (Id,DeviceId,ZipCodeId,BuildingNumber) VALUES ({idAddress},$DeviceId,{supplierZipCodeId},{supplier.BillingAddress?.BuildingNumber ?? "''"});");
+
+                sql.AppendLine(
+                    $"INSERT INTO Supplier (Id,DeviceId,SupplierTaxID,Name,IsActive,AddressId,AddressDeviceId) VALUES ({idsupplier},$DeviceId,{supplier.SupplierTaxID},{supplier.CompanyName},1,{idAddress},$DeviceId);");
+
+                idAddress++;
+                idsupplier++;
+            }
+
+            string file = fileService.GenerateRandonFileName(".txt");
+            fileService.WriteToFile(file, sql.ToString());
+
+            Process.Start(file);
         }
 
         public DelegateCommand DoPrintCommand { get; private set; }

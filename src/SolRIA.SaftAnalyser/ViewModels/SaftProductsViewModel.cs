@@ -8,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
@@ -15,12 +16,15 @@ namespace SolRIA.SaftAnalyser.ViewModels
     {
         INavigationService navService;
         IMessageService messageService;
-        public SaftProductsViewModel(INavigationService navService, IMessageService messageService)
+        IFileService fileService;
+        public SaftProductsViewModel(INavigationService navService, IMessageService messageService, IFileService fileService)
         {
             this.navService = navService;
             this.messageService = messageService;
+            this.fileService = fileService;
 
             DoPrintCommand = new DelegateCommand(OnPrint);
+            GenerateScriptCommand = new DelegateCommand(OnGenerateScript);
 
             navService.LoadCompleted += NavService_LoadCompleted;
         }
@@ -39,22 +43,19 @@ namespace SolRIA.SaftAnalyser.ViewModels
         Product[] products;
         public Product[] Products
         {
-            get => products;
-            set => SetProperty(ref products, value);
+            get => products; set => SetProperty(ref products, value);
         }
 
         Product product;
         public Product Product
         {
-            get => product;
-            set => SetProperty(ref product, value);
+            get => product; set => SetProperty(ref product, value);
         }
 
         string filter;
         public string Filter
         {
-            get => filter;
-            set => SetProperty(ref filter, value, FilterProducts);
+            get => filter; set => SetProperty(ref filter, value, FilterProducts);
         }
 
         private void FilterProducts()
@@ -71,6 +72,28 @@ namespace SolRIA.SaftAnalyser.ViewModels
                             c.ProductType.ToString().IndexOf(filter, System.StringComparison.OrdinalIgnoreCase) >= 0
                             select c).ToArray();
             }
+        }
+
+        public DelegateCommand GenerateScriptCommand { get; private set; }
+        private void OnGenerateScript()
+        {
+            decimal unitPrice = 0;
+            int id = 1;
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("--Script gerado para SolRIA POS");
+            sql.AppendLine("--Este script precisa de ser editado por um funcionário da SolRIA");
+            foreach (var product in Products)
+            {
+                sql.AppendLine(
+                    $"INSERT INTO Product (Id,DeviceId,Code,Name,IsActive,UnitPrice) VALUES ({id},$DeviceId,{product.ProductCode},{product.ProductDescription},1,{unitPrice});");
+
+                id++;
+            }
+
+            string file = fileService.GenerateRandonFileName(".txt");
+            fileService.WriteToFile(file, sql.ToString());
+
+            Process.Start(file);
         }
 
         public DelegateCommand DoPrintCommand { get; private set; }
@@ -96,7 +119,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
                 wsEnum.Cells[wsEnum.Dimension.Address].AutoFitColumns();
 
                 //...and save
-                var fi = new FileInfo(Path.GetTempPath() + Path.GetRandomFileName() + ".xlsx");
+                var fi = new FileInfo(fileService.GenerateRandonFileName());
                 if (fi.Exists)
                     fi.Delete();
 

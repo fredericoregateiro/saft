@@ -889,13 +889,11 @@ namespace SolRIA.SaftAnalyser
                 taxPayable += workDocument.Line.Where(l => l.Tax == null)
                                         .Sum(l => l.Item);
 
-                int numCasasDecimais = 6;// Workspace.Instance.Config.NumCasasDecimaisValidacoes;
-
-                if (netTotal != workDocument.DocumentTotals.NetTotal && Math.Round(netTotal, numCasasDecimais, MidpointRounding.AwayFromZero) != workDocument.DocumentTotals.NetTotal)
+                if (Math.Abs(netTotal - workDocument.DocumentTotals.NetTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = workDocument.DocumentTotals.NetTotal.ToString(), Field = "NetTotal", TypeofError = typeof(SourceDocumentsWorkingDocumentsWorkDocument), Description = string.Format("Total de incidência incorrecto. Documento: {0}, esperado: {1}", workDocument.DocumentTotals.NetTotal, netTotal) });
-                if (grossTotal != workDocument.DocumentTotals.GrossTotal && Math.Round(grossTotal, numCasasDecimais, MidpointRounding.AwayFromZero) != workDocument.DocumentTotals.GrossTotal)
+                if (Math.Abs(grossTotal - workDocument.DocumentTotals.GrossTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = workDocument.DocumentTotals.GrossTotal.ToString(), Field = "GrossTotal", TypeofError = typeof(SourceDocumentsWorkingDocumentsWorkDocument), Description = string.Format("Total incorrecto. Documento: {0}, esperado: {1}", workDocument.DocumentTotals.GrossTotal, grossTotal) });
-                if (taxPayable != workDocument.DocumentTotals.TaxPayable && Math.Round(taxPayable, numCasasDecimais, MidpointRounding.AwayFromZero) != workDocument.DocumentTotals.TaxPayable)
+                if (Math.Abs(taxPayable - workDocument.DocumentTotals.TaxPayable) > 0.01m)
                     MensagensErro.Add(new Error { Value = workDocument.DocumentTotals.TaxPayable.ToString(), Field = "TaxPayable", TypeofError = typeof(SourceDocumentsWorkingDocumentsWorkDocument), Description = string.Format("Total de imposto incorrecto. Documento: {0}, esperado: {1}", workDocument.DocumentTotals.TaxPayable, taxPayable) });
 
                 foreach (var line in workDocument.Line)
@@ -954,13 +952,11 @@ namespace SolRIA.SaftAnalyser
                 decimal grossTotal = movement.Line.Sum(l => l.Item * (1 + (l.Tax != null ? l.Tax.TaxPercentage : 0) * 0.01m));
                 decimal taxPayable = movement.Line.Sum(l => l.Item * (l.Tax != null ? l.Tax.TaxPercentage : 0) * 0.01m);
 
-                int numCasasDecimais = 6;// Workspace.Instance.Config.NumCasasDecimaisValidacoes;
-
-                if (netTotal != movement.DocumentTotals.NetTotal && Math.Round(netTotal, numCasasDecimais, MidpointRounding.AwayFromZero) != movement.DocumentTotals.NetTotal)
+                if (Math.Abs(netTotal - movement.DocumentTotals.NetTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = movement.DocumentTotals.NetTotal.ToString(), Field = "NetTotal", TypeofError = typeof(SourceDocumentsMovementOfGoods), Description = string.Format("Total de incidência incorrecto. Documento: {0}, esperado: {1}", movement.DocumentTotals.NetTotal, netTotal) });
-                if (grossTotal != movement.DocumentTotals.GrossTotal && Math.Round(grossTotal, numCasasDecimais, MidpointRounding.AwayFromZero) != movement.DocumentTotals.GrossTotal)
+                if (Math.Abs(grossTotal - movement.DocumentTotals.GrossTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = movement.DocumentTotals.GrossTotal.ToString(), Field = "GrossTotal", TypeofError = typeof(SourceDocumentsMovementOfGoods), Description = string.Format("Total incorrecto. Documento: {0}, esperado: {1}", movement.DocumentTotals.GrossTotal, grossTotal) });
-                if (taxPayable != movement.DocumentTotals.TaxPayable && Math.Round(taxPayable, numCasasDecimais, MidpointRounding.AwayFromZero) != movement.DocumentTotals.TaxPayable)
+                if (Math.Abs(taxPayable - movement.DocumentTotals.TaxPayable) > 0.01m)
                     MensagensErro.Add(new Error { Value = movement.DocumentTotals.TaxPayable.ToString(), Field = "TaxPayable", TypeofError = typeof(SourceDocumentsMovementOfGoods), Description = string.Format("Total de imposto incorrecto. Documento: {0}, esperado: {1}", movement.DocumentTotals.TaxPayable, taxPayable) });
 
                 //verificar as linhas
@@ -1016,7 +1012,6 @@ namespace SolRIA.SaftAnalyser
                 MensagensErro.AddRange(invoice.ValidateDocumentTotals());
 
                 decimal total = 0, incidencia = 0, iva = 0;
-                decimal totalArred = 0, incidenciaArred = 0, ivaArred = 0;
                 int numLinha = 1, num = -1;
                 foreach (var line in invoice.Line)
                 {
@@ -1037,25 +1032,21 @@ namespace SolRIA.SaftAnalyser
                     total += line.Item * (1 + line.Tax.Item * 0.01m) * Operation(invoice, line);
                     incidencia += line.Item * Operation(invoice, line);
                     iva += line.Item * line.Tax.Item * 0.01m * Operation(invoice, line);
-
-                    totalArred += Math.Round(line.Item * (1 + line.Tax.Item * 0.01m) * Operation(invoice, line), 2, MidpointRounding.AwayFromZero);
-                    incidenciaArred += Math.Round(line.Item * Operation(invoice, line), 2, MidpointRounding.AwayFromZero);
-                    ivaArred += Math.Round(line.Item * line.Tax.Item * 0.01m * Operation(invoice, line), 2, MidpointRounding.AwayFromZero);
                 }
                 //arredondar o valor a 2 casas decimais
                 incidencia = Math.Round(incidencia, 2, MidpointRounding.AwayFromZero);
                 iva = Math.Round(iva, 2, MidpointRounding.AwayFromZero);
                 total = Math.Round(total, 2, MidpointRounding.AwayFromZero);
 
-                if (total != invoice.DocumentTotals.GrossTotal && totalArred != invoice.DocumentTotals.GrossTotal)
+                if (Math.Abs(total - invoice.DocumentTotals.GrossTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = invoice.InvoiceNo, Field = "GrossTotal", TypeofError = typeof(SourceDocumentsSalesInvoicesInvoice), Description = string.Format("Total errado. Documento: {0}, total: {1} esperado: {2}", invoice.InvoiceNo, invoice.DocumentTotals.GrossTotal, total), UID = invoice.Pk });
-                if (incidencia != invoice.DocumentTotals.NetTotal && incidenciaArred != invoice.DocumentTotals.NetTotal)
+                if (Math.Abs(incidencia - invoice.DocumentTotals.NetTotal) > 0.01m)
                     MensagensErro.Add(new Error { Value = invoice.InvoiceNo, Field = "NetTotal", TypeofError = typeof(SourceDocumentsSalesInvoicesInvoice), Description = string.Format("Incidencia errada. Documento {0}, incidencia:{1} esperado:{2}", invoice.InvoiceNo, invoice.DocumentTotals.NetTotal, incidencia), UID = invoice.Pk });
-                if (iva != invoice.DocumentTotals.TaxPayable && ivaArred != invoice.DocumentTotals.TaxPayable)
+                if (Math.Abs(iva - invoice.DocumentTotals.TaxPayable) > 0.01m)
                     MensagensErro.Add(new Error { Value = invoice.InvoiceNo, Field = "TaxPayable", TypeofError = typeof(SourceDocumentsSalesInvoicesInvoice), Description = string.Format("Iva errado. Documento: {0}, iva: {1} esperado: {2}", invoice.InvoiceNo, invoice.DocumentTotals.TaxPayable, iva), UID = invoice.Pk });
-                if (invoice.DocumentTotals.TaxPayable != invoice.DocumentTotals.GrossTotal - invoice.DocumentTotals.NetTotal)
+                if (Math.Abs(invoice.DocumentTotals.TaxPayable - (invoice.DocumentTotals.GrossTotal - invoice.DocumentTotals.NetTotal)) > 0.01m)
                     MensagensErro.Add(new Error { Value = invoice.InvoiceNo, Field = "TaxPayable", TypeofError = typeof(SourceDocumentsSalesInvoicesInvoice), Description = string.Format("Iva errado. Documento: {0}, iva: {1} esperado: {2}", invoice.InvoiceNo, invoice.DocumentTotals.TaxPayable, invoice.DocumentTotals.GrossTotal - invoice.DocumentTotals.NetTotal), UID = invoice.Pk });
-                if (invoice.DocumentTotals.GrossTotal != invoice.DocumentTotals.NetTotal + invoice.DocumentTotals.TaxPayable)
+                if (Math.Abs(invoice.DocumentTotals.GrossTotal - (invoice.DocumentTotals.NetTotal + invoice.DocumentTotals.TaxPayable)) > 0.01m)
                     MensagensErro.Add(new Error { Value = invoice.InvoiceNo, Field = "DocumentTotals", TypeofError = typeof(SourceDocumentsSalesInvoicesInvoice), Description = string.Format("Total errado. Documento: {0}, NetTotal + TaxPayable = {1} != GrossTotal", invoice.InvoiceNo, invoice.DocumentTotals.NetTotal + invoice.DocumentTotals.TaxPayable, invoice.DocumentTotals.GrossTotal), UID = invoice.Pk });
             }
         }
