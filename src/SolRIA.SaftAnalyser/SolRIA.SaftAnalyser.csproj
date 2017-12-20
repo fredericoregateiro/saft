@@ -132,6 +132,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\DTOs.cs" />
+    <Compile Include="Models\FactemiCLIParams.cs" />
     <Compile Include="PageBase.cs" />
     <Compile Include="PagesIds.cs" />
     <Compile Include="ViewModels\SaftInvoicesSummaryViewModel.cs" />
@@ -146,6 +147,9 @@
     <Compile Include="ViewModels\SaftHeaderViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaftSendFile.xaml.cs">
+      <DependentUpon>SaftSendFile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaftInvoicesSummary.xaml.cs">
       <DependentUpon>SaftInvoicesSummary.xaml</DependentUpon>
@@ -193,6 +197,10 @@
     <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaftSendFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SaftInvoicesSummary.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +254,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="app.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AT\FACTEMICLI-2.5.6-cmdClient.jar">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="sqlite3.dll">
