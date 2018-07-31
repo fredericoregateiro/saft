@@ -52,7 +52,7 @@
 					<Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 0 8 0"/>
 
 					<StackPanel Grid.Row="3">
-						<Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Margin="8 4 8 8">Escolher ficheiro</Button>
+                        <Button Command="{Binding OpenStockFileCommand}" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Margin="8 4 8 8">Escolher ficheiro</Button>
 					</StackPanel>
 				</Grid>
 			</materialDesign:Card>

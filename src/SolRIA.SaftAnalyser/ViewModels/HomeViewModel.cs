@@ -4,6 +4,8 @@ using Prism.Mvvm;
 using SolRIA.SaftAnalyser.Interfaces;
 using SolRIA.SaftAnalyser.Views;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
@@ -23,12 +25,16 @@ namespace SolRIA.SaftAnalyser.ViewModels
 
 			//init commands
 			OpenSaftFileCommand = new DelegateCommand(OnOpenSaftFile);
-		}
+            OpenStockFileCommand = new DelegateCommand(OnOpenStockFile);
+        }
 
 		public DelegateCommand OpenSaftFileCommand { get; private set; }
-		public async virtual void OnOpenSaftFile()
+		public async void OnOpenSaftFile()
 		{
 			string file = fileService.ChooseFile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Ficheiros XMl", "(*.xml)|*.xml");
+
+            if (string.IsNullOrWhiteSpace(file) || File.Exists(file) == false)
+                return;
 
 			await OpenedFileInstance.Instance.OpenSaftFile(file);
 
@@ -52,7 +58,25 @@ namespace SolRIA.SaftAnalyser.ViewModels
 			}
 		}
 
-		private void OpenedEventHandler(object sender, DialogOpenedEventArgs eventargs)
+        public DelegateCommand OpenStockFileCommand { get; private set; }
+        public async void OnOpenStockFile()
+        {
+            string file = fileService.ChooseFile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Ficheiros XMl", "(*.xml)|*.xml");
+
+            if (string.IsNullOrWhiteSpace(file) || File.Exists(file) == false)
+                return;
+
+            await OpenedFileInstance.Instance.OpenStockFile(file);
+
+            if(OpenedFileInstance.Instance.StockFile != null)
+            {
+                var sumProducts = OpenedFileInstance.Instance.StockFile.Stock.Sum(c => c.ClosingStockQuantity);
+                var totalProducts = OpenedFileInstance.Instance.StockFile.Stock.Length;
+                var totalDistinctProducts = OpenedFileInstance.Instance.StockFile.Stock.Distinct().Count();
+            }
+        }
+
+        private void OpenedEventHandler(object sender, DialogOpenedEventArgs eventargs)
 		{
 
 		}

@@ -1,13 +1,10 @@
 ﻿using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
-using SolRIA.SaftAnalyser.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SolRIA.SaftAnalyser.Services
 {
-	public class SaftValidator : ISaftValidator
+    public class SaftValidator : ISaftValidator
 	{
 		public int GetSaftErrors()
 		{
@@ -23,5 +20,15 @@ namespace SolRIA.SaftAnalyser.Services
 		{
 			return OpenedFileInstance.Instance.MensagensErro.Where(c => c.TypeofError == typeof(Customer)).Count();
 		}
-	}
+
+        public int GetSaftHashValidationNumber()
+        {
+            return OpenedFileInstance.Instance.SaftHashValidationNumber;
+        }
+
+        public int GetSaftHashValidationErrorNumber()
+        {
+            return OpenedFileInstance.Instance.SaftHashValidationErrorNumber;
+        }
+    }
 }

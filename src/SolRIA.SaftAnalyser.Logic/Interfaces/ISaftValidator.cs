@@ -5,5 +5,7 @@
 		int GetSaftErrors();
 		int GetSaftHeaderErrors();
 		int GetSaftCustomersErrors();
-	}
+        int GetSaftHashValidationNumber();
+        int GetSaftHashValidationErrorNumber();
+    }
 }

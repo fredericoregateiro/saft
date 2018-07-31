@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Linq;
+using System.Globalization;
 
 namespace SolRIA.SaftAnalyser
 {
@@ -41,7 +42,9 @@ namespace SolRIA.SaftAnalyser
         System.Globalization.CultureInfo enCulture = new System.Globalization.CultureInfo("en-US");
 
         public string SaftFileName { get; set; }
+        public string StockFileName { get; set; }
         public AuditFile SaftFile { get; set; }
+        public SolRia.Erp.Models.Stocks.StocksFile.StockFile StockFile { get; set; }
 
         List<Error> mensagensErro;
         public List<Error> MensagensErro
@@ -54,6 +57,9 @@ namespace SolRIA.SaftAnalyser
             }
             set { mensagensErro = value; }
         }
+
+        public int SaftHashValidationNumber { get; set; }
+        public int SaftHashValidationErrorNumber { get; set; }
 
         /// <summary>
         /// Loads the SAFT file
@@ -137,6 +143,12 @@ namespace SolRIA.SaftAnalyser
                 if (SaftFile.SourceDocuments != null && SaftFile.SourceDocuments.WorkingDocuments != null)
                     ValidateWorkDocument(SaftFile.SourceDocuments.WorkingDocuments);
 
+                //check for solria saft, if true validate the hash
+                SaftHashValidationNumber = 0;
+                SaftHashValidationErrorNumber = 0;
+                if (SaftFile.Header.SoftwareCertificateNumber == "2340")
+                    SolRiaValidateSaftHash(SaftFile);
+
                 //remove empty messages
                 MensagensErro.RemoveAll(c => c == null || string.IsNullOrEmpty(c.Description));
             }
@@ -146,6 +158,149 @@ namespace SolRIA.SaftAnalyser
                 MensagensErro.Add(new Error { Description = "Erro ao abrir o ficheiro" });
             }
         }
+
+        public async Task OpenStockFile(string filename)
+        {
+            StockFileName = filename;
+
+            StockFile = await XmlSerializer.Deserialize<SolRia.Erp.Models.Stocks.StocksFile.StockFile>(StockFileName);
+        }
+
+        private void SolRiaValidateSaftHash(AuditFile auditFile)
+        {
+            object hasher = SHA1.Create();
+
+            using (RSACryptoServiceProvider rsaCryptokey = new RSACryptoServiceProvider(1024))
+            {
+                rsaCryptokey.FromXmlString("<RSAKeyValue><Modulus>vU9AbSDUgXjuKEHl8UaYWfboVz0YRnMMspGHxZ59aJSEYwMYPNsmakNBS9is3+BGXd3AVlthaPmNW5BUuzICNyCQ+DldQ9dP8jr7xcyv1+E5xrMobF8+4xD2ST+DuAUw41ZTCZA3/r47BXonF/DWx+PpVhS68zorDWiJZUJGVg8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>");
+
+                StringBuilder toHash = new StringBuilder();
+
+                //invoices
+                if (auditFile.SourceDocuments.SalesInvoices != null)
+                {
+                    for (int i = 0; i < auditFile.SourceDocuments.SalesInvoices.Invoice.Length; i++)
+                    {
+                        SourceDocumentsSalesInvoicesInvoice invoice = auditFile.SourceDocuments.SalesInvoices.Invoice[i];
+
+                        bool usaHashAnterior = true;
+                        if (i == 0 || invoice.InvoiceType != auditFile.SourceDocuments.SalesInvoices.Invoice[i - 1].InvoiceType || Convert.ToInt32(invoice.InvoiceNo.Split('/')[1]) != Convert.ToInt32(auditFile.SourceDocuments.SalesInvoices.Invoice[i - 1].InvoiceNo.Split('/')[1]) + 1)
+                            usaHashAnterior = false;
+
+                        //ignore the first documents on each billing numbers, there is no way to verify these without the hash of the previous documents
+                        if (usaHashAnterior == false)
+                            continue;
+
+                        //check for invoice hash
+                        if (SolRiaHashExists(invoice.Hash, invoice.InvoiceNo) == false)
+                            continue;
+
+                        //build the hash
+                        SolRiaBuildHash(toHash, invoice.InvoiceDate, invoice.SystemEntryDate, invoice.InvoiceNo, invoice.DocumentTotals.GrossTotal, usaHashAnterior ? auditFile.SourceDocuments.SalesInvoices.Invoice[i - 1].Hash : "");
+
+                        SolRiaIsHashValid(toHash.ToString(), invoice.Hash, rsaCryptokey, hasher, invoice.InvoiceNo);
+                    }
+                }
+
+                //movement of goods
+                if (auditFile.SourceDocuments.MovementOfGoods != null)
+                {
+                    for (int i = 0; i < auditFile.SourceDocuments.MovementOfGoods.StockMovement.Length; i++)
+                    {
+                        SourceDocumentsMovementOfGoodsStockMovement movement = auditFile.SourceDocuments.MovementOfGoods.StockMovement[i];
+
+                        bool usaHashAnterior = true;
+                        if (i == 0 || movement.MovementType != auditFile.SourceDocuments.MovementOfGoods.StockMovement[i - 1].MovementType || Convert.ToInt32(movement.DocumentNumber.Split('/')[1]) != Convert.ToInt32(auditFile.SourceDocuments.MovementOfGoods.StockMovement[i - 1].DocumentNumber.Split('/')[1]) + 1)
+                            usaHashAnterior = false;
+
+                        //ignore the first documents on each billing numbers, there is no way to verify these without the hash of the previous documents
+                        if (usaHashAnterior == false)
+                            continue;
+
+                        //check for invoice hash
+                        if (SolRiaHashExists(movement.Hash, movement.DocumentNumber) == false)
+                            continue;
+
+                        //build the hash
+                        SolRiaBuildHash(toHash, movement.MovementDate, movement.SystemEntryDate, movement.DocumentNumber, movement.DocumentTotals.GrossTotal, usaHashAnterior ? auditFile.SourceDocuments.MovementOfGoods.StockMovement[i - 1].Hash : "");
+
+                        SolRiaIsHashValid(toHash.ToString(), movement.Hash, rsaCryptokey, hasher, movement.DocumentNumber);
+                    }
+                }
+
+                //working documents
+                if (auditFile.SourceDocuments.WorkingDocuments != null)
+                {
+                    for (int i = 0; i < auditFile.SourceDocuments.WorkingDocuments.WorkDocument.Length; i++)
+                    {
+                        SourceDocumentsWorkingDocumentsWorkDocument document = auditFile.SourceDocuments.WorkingDocuments.WorkDocument[i];
+
+                        bool usaHashAnterior = true;
+                        if (i == 0 || document.WorkType != auditFile.SourceDocuments.WorkingDocuments.WorkDocument[i - 1].WorkType || Convert.ToInt32(document.DocumentNumber.Split('/')[1]) != Convert.ToInt32(auditFile.SourceDocuments.WorkingDocuments.WorkDocument[i - 1].DocumentNumber.Split('/')[1]) + 1)
+                            usaHashAnterior = false;
+
+                        //ignore the first documents on each billing numbers, there is no way to verify these without the hash of the previous documents
+                        if (usaHashAnterior == false)
+                            continue;
+
+                        //check for invoice hash
+                        if (SolRiaHashExists(document.Hash, document.DocumentNumber) == false)
+                            continue;
+
+                        //build the hash
+                        SolRiaBuildHash(toHash, document.WorkDate, document.SystemEntryDate, document.DocumentNumber, document.DocumentTotals.GrossTotal, usaHashAnterior ? auditFile.SourceDocuments.WorkingDocuments.WorkDocument[i - 1].Hash : "");
+
+                        SolRiaIsHashValid(toHash.ToString(), document.Hash, rsaCryptokey, hasher, document.DocumentNumber);
+                    }
+                }
+            }
+        }
+
+        private bool SolRiaHashExists(string hash, string documentNo)
+        {
+            if (string.IsNullOrEmpty(hash))
+            {
+                MensagensErro.Add(new Error { Description = string.Format("Erro dados: A assinatura do documento {0} não existe.", documentNo) });
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private void SolRiaBuildHash(StringBuilder toHash, DateTime documentDate, DateTime systemEntryDate, string documentNo, decimal documentTotal, string hashAnterior)
+        {
+            toHash.Clear();
+
+            toHash.AppendFormat("{0};{1};{2};{3};{4}"
+                , documentDate.ToString("yyyy-MM-dd")
+                , systemEntryDate.ToString("yyyy-MM-ddTHH:mm:ss")
+                , documentNo
+                , documentTotal.ToString("0.00", CultureInfo.InvariantCulture)
+                , hashAnterior);
+        }
+
+        private bool SolRiaIsHashValid(string generatedHash, string fileHash, RSACryptoServiceProvider rsaCryptokey, object hasher, string documentNo)
+        {
+            byte[] stringToHashBuffer = Encoding.UTF8.GetBytes(generatedHash);
+            byte[] hashBuffer = Convert.FromBase64String(fileHash);
+
+            //verifi the hash with the public key
+            bool isHashCorrect = rsaCryptokey.VerifyData(stringToHashBuffer, hasher, hashBuffer);
+
+            //add error message if the document hash is incorrect
+            if (isHashCorrect == false)
+            {
+                MensagensErro.Add(new Error { Description = string.Format("Erro dados: A assinatura do documento {0} é inválida.", documentNo) });
+
+                SaftHashValidationErrorNumber++;
+                return false;
+            }
+
+            SaftHashValidationNumber++;
+            return true;
+        }
+
 
         /// <summary>
         /// Validate the hashes in the file for the sales invoices
@@ -237,34 +392,6 @@ namespace SolRIA.SaftAnalyser
 
             //if (MensagensErro != null && e.Cancelled == false)
             //	Mediator.Instance.NotifyColleaguesAsync<Error[]>(MessageType.ERROR_FOUND, MensagensErro.ToArray());
-        }
-
-        void bw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            MensagensErro.Clear();
-
-            //if (File.Exists(e.Argument.ToString()))
-            //{
-            //	SaftFile = XmlSerializer.Deserialize<AuditFile>(e.Argument.ToString());
-            //	FileVersion = SaftFileVersion.V10301;
-
-            //	if (SaftFile == null)
-            //	{
-            //		//try to open the old version
-            //		Model.V2.AuditFile oldSaftFile = XmlSerializer.Deserialize<Model.V2.AuditFile>(e.Argument.ToString());
-            //		//convert the old to the new version
-            //		SaftFile = ConvertV2ToV3.Convert(oldSaftFile);
-            //		FileVersion = SaftFileVersion.V10201;
-            //	}
-            //	if (SaftFile == null)
-            //	{
-            //		//try to open the old version
-            //		Model.V1.AuditFile oldSaftFile = XmlSerializer.Deserialize<Model.V1.AuditFile>(e.Argument.ToString());
-            //		//convert the old to the new version
-            //		SaftFile = ConvertV1ToV3.Convert(oldSaftFile);
-            //		FileVersion = SaftFileVersion.V10101;
-            //	}
-            //}
         }
 
         void bw_RunWorkerCompletedHash(object sender, RunWorkerCompletedEventArgs e)
