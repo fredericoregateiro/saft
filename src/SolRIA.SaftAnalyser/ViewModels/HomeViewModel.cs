@@ -1,7 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
-using Prism.Commands;
-using Prism.Mvvm;
 using SolRIA.SaftAnalyser.Interfaces;
+using SolRIA.SaftAnalyser.Mvvm;
 using SolRIA.SaftAnalyser.Views;
 using System;
 using System.IO;
@@ -9,7 +8,7 @@ using System.Linq;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
-	public class HomeViewModel : BindableBase
+    public class HomeViewModel : BindableBase
 	{
 		IFileService fileService;
 		INavigationService navService;

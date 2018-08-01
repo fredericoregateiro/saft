@@ -1,9 +1,8 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using SolRia.Erp.MobileApp.Models.SaftV4;
+﻿using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
 using System;
 using System.Linq;
+using SolRIA.SaftAnalyser.Mvvm;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
@@ -130,14 +129,22 @@ namespace SolRIA.SaftAnalyser.ViewModels
         DateTime filtroDataInicio;
         public DateTime FiltroDataInicio
         {
-            get { return filtroDataInicio; }
-            set { SetProperty(ref filtroDataInicio, value, FilterInvoicesByDate); }
+            get => filtroDataInicio;
+            set
+            {
+                SetProperty(ref filtroDataInicio, value);
+                FilterInvoicesByDate();
+            }
         }
         DateTime filtroDataFim;
         public DateTime FiltroDataFim
         {
-            get { return filtroDataFim; }
-            set { SetProperty(ref filtroDataFim, value, FilterInvoicesByDate); }
+            get => filtroDataFim;
+            set
+            {
+                SetProperty(ref filtroDataFim, value);
+                FilterInvoicesByDate();
+            }
         }
 
         private void FilterInvoicesByDate()
@@ -269,7 +276,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
         public DelegateCommand ShowInvoiceDetailsCommand { get; private set; }
         private void DoShowInvoiceDetails(object args)
         {
-            
+
         }
         private bool CanShowInvoiceDetails(object args)
         {
@@ -279,7 +286,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
         public DelegateCommand ShowCustomerCommand { get; private set; }
         private void DoShowCustomer(object args)
         {
-            
+
         }
         private bool CanShowCustomer(object args)
         {

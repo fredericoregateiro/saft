@@ -1,9 +1,10 @@
-﻿using MaterialDesignThemes.Wpf;
-using Microsoft.Practices.Unity;
+﻿using DryIoc;
+using MaterialDesignThemes.Wpf;
 using NLog;
-using Prism.Mvvm;
 using SolRIA.SaftAnalyser.Interfaces;
+using SolRIA.SaftAnalyser.Mvvm;
 using SolRIA.SaftAnalyser.Services;
+using SolRIA.SaftAnalyser.ViewModels;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -13,14 +14,14 @@ using System.Windows.Navigation;
 
 namespace SolRIA.SaftAnalyser
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
 	{
 		static Logger logger = LogManager.GetCurrentClassLogger();
 
-		public static readonly IUnityContainer container = new UnityContainer();
+		public static readonly Container container = new Container();
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
@@ -31,8 +32,22 @@ namespace SolRIA.SaftAnalyser
 
             Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
-			//resolve the viewmodels
-			ViewModelLocationProvider.SetDefaultViewModelFactory((type) => container.Resolve(type));
+            //resolve all the viewmodels
+            container.RegisterMany(new[] {
+                typeof(HomeViewModel),
+                typeof(SaftCustomersViewModel),
+                typeof(SaftErrorsViewModel),
+                typeof(SaftHeaderViewModel),
+                typeof(SaftInvoicesSummaryViewModel),
+                typeof(SaftInvoicesViewModel),
+                typeof(SaftProductsViewModel),
+                typeof(SaftSuppliersViewModel),
+                typeof(SaftTaxesViewModel),
+                typeof(SaftValidationResumeViewModel),
+            });
+
+            //resolve the viewmodels
+            ViewModelLocationProvider.SetDefaultViewModelFactory((type) => container.Resolve(type));
 
             Current.MainWindow = new MainWindow();
             //show the main window
@@ -59,13 +74,13 @@ namespace SolRIA.SaftAnalyser
 			ILogService logService = new LogService(logger);
 			INavigationService navigationService = new SimpleNavigationService(navService);
 
-			container.RegisterInstance(logService);
-			container.RegisterInstance<IDataRepository>(new DataRepository(logService));
+			container.UseInstance(logService);
+			container.UseInstance<IDataRepository>(new DataRepository(logService));
 
-			container.RegisterInstance(navigationService);
-			container.RegisterInstance<IFileService>(new FileService());
-			container.RegisterInstance<IMessageService>(new MessageService(mainSnackbar, dialogHost));
-			container.RegisterInstance<ISaftValidator>(new SaftValidator());
+			container.UseInstance(navigationService);
+			container.UseInstance<IFileService>(new FileService());
+			container.UseInstance<IMessageService>(new MessageService(mainSnackbar, dialogHost));
+			container.UseInstance<ISaftValidator>(new SaftValidator());
 
 			//go to home
 			navigationService.Navigate(PagesIds.HOME);

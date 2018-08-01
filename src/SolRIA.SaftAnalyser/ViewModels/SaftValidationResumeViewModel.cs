@@ -1,11 +1,10 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using SolRia.Erp.MobileApp.Models.SaftV4;
+﻿using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
+using SolRIA.SaftAnalyser.Mvvm;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
-	public class SaftValidationResumeViewModel : BindableBase
+    public class SaftValidationResumeViewModel : BindableBase
 	{
 		INavigationService navService;
 		ISaftValidator saftValidator;

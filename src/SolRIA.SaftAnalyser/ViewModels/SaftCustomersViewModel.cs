@@ -1,10 +1,9 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Table;
-using Prism.Commands;
-using Prism.Mvvm;
 using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
 using SolRIA.SaftAnalyser.Logic.Models;
+using SolRIA.SaftAnalyser.Mvvm;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +14,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
 {
     public class SaftCustomersViewModel : BindableBase
     {
-        INavigationService navService;
+        readonly INavigationService navService;
         IMessageService messageService;
         IFileService fileService;
         public SaftCustomersViewModel(INavigationService navService, IMessageService messageService, IFileService fileService)
@@ -48,12 +47,17 @@ namespace SolRIA.SaftAnalyser.ViewModels
         private string filter;
         public string Filter
         {
-            get => filter; set => SetProperty(ref filter, value, FilterCustomers);
+            get => filter;
+            set
+            {
+                SetProperty(ref filter, value);
+                FilterCustomers();
+            }
         }
 
         //SearchCommand
         public DelegateCommand SearchCommand { get; private set; }
-        public virtual void OnSearch()
+        public void OnSearch()
         {
             FilterCustomers();
         }

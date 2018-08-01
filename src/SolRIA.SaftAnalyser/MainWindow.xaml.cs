@@ -1,6 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using SolRIA.SaftAnalyser.Interfaces;
+﻿using SolRIA.SaftAnalyser.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +7,8 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Practices.Unity;
+using SolRIA.SaftAnalyser.Mvvm;
+using DryIoc;
 
 namespace SolRIA.SaftAnalyser
 {
@@ -108,8 +107,7 @@ namespace SolRIA.SaftAnalyser
                 new SaftPage{ Name = "Erros", View = PagesIds.SAFT_ERRORS },
             };
 
-            SaftPages = new ObservableCollection<SaftPage>();
-            SaftPages.AddRange(allPages);
+            SaftPages = new ObservableCollection<SaftPage>(allPages);
         }
         SaftPage[] allPages;
 

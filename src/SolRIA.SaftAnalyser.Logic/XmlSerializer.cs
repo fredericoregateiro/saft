@@ -22,7 +22,7 @@ namespace SolRIA.SaftAnalyser
 					return config;
 				});
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return default(T);
 			}

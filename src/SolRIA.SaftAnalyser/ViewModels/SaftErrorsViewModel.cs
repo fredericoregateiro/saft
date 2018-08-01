@@ -1,7 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using SolRIA.SaftAnalyser.Interfaces;
+﻿using SolRIA.SaftAnalyser.Interfaces;
 using SolRIA.SaftAnalyser.Models;
+using SolRIA.SaftAnalyser.Mvvm;
 using System;
 using System.Linq;
 

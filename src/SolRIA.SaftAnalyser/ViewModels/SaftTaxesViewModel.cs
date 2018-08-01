@@ -1,7 +1,5 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Table;
-using Prism.Commands;
-using Prism.Mvvm;
 using SolRia.Erp.MobileApp.Models.SaftV4;
 using SolRIA.SaftAnalyser.Interfaces;
 using System;
@@ -9,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using SolRIA.SaftAnalyser.Mvvm;
 
 namespace SolRIA.SaftAnalyser.ViewModels
 {
