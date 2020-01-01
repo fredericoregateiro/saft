@@ -2504,6 +2504,9 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 
 	public partial class Product : BaseData, IDataErrorInfo
 	{
+		public string Prices { get; set; }
+		public string Taxes { get; set; }
+
 		//ProductToolTipService tooltip;
 		//public ProductToolTipService Tooltip
 		//{
@@ -2699,7 +2702,7 @@ namespace SolRia.Erp.MobileApp.Models.SaftV4
 		public Error ValidateCustomerTaxID(bool appendError = false)
 		{
 			Error erro = null;
-			if (!Validations.CheckTaxRegistrationNumber(CustomerTaxID))
+			if (BillingAddress?.Country == "PT" && !Validations.CheckTaxRegistrationNumber(CustomerTaxID))
 			{
 				erro = new Error { Description = "Número de identificação fiscal inválido", Field = "CustomerTaxID", TypeofError = GetType(), Value = CustomerTaxID, UID = Pk };
 				//if (appendError)

@@ -13,12 +13,10 @@ namespace SolRIA.SaftAnalyser.ViewModels
 {
     public class SaftProductsViewModel : BindableBase
     {
-        INavigationService navService;
-        IMessageService messageService;
-        IFileService fileService;
+        readonly IMessageService messageService;
+        readonly IFileService fileService;
         public SaftProductsViewModel(INavigationService navService, IMessageService messageService, IFileService fileService)
         {
-            this.navService = navService;
             this.messageService = messageService;
             this.fileService = fileService;
 
@@ -32,6 +30,79 @@ namespace SolRIA.SaftAnalyser.ViewModels
         {
             if (OpenedFileInstance.Instance.SaftFile.MasterFiles != null)
                 productsBack = OpenedFileInstance.Instance.SaftFile.MasterFiles.Product;
+
+            //read the prices and taxes
+            if (productsBack != null)
+            {
+                var invoices_lines = OpenedFileInstance.Instance.SaftFile?.SourceDocuments?.SalesInvoices?.Invoice?.SelectMany(i => i.Line);
+                if (invoices_lines != null)
+                {
+                    foreach (var p in productsBack)
+                    {
+                        var prices = invoices_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.UnitPrice.ToString("N2"))
+                            .Distinct()
+                            .ToArray();
+
+                        var taxes = invoices_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.Tax.TaxCode)
+                            .Distinct()
+                            .ToArray();
+
+                        if (prices != null && prices.Length > 0)
+                            p.Prices = prices.Aggregate((i, j) => i + " | " + j);
+
+                        if (taxes != null && taxes.Length > 0)
+                            p.Taxes = taxes.Aggregate((i, j) => i + " | " + j);
+                    }
+                }
+
+                var movements_lines = OpenedFileInstance.Instance.SaftFile?.SourceDocuments?.MovementOfGoods?.StockMovement?.SelectMany(i => i.Line);
+                if (movements_lines != null)
+                {
+                    foreach (var p in productsBack)
+                    {
+                        var prices = movements_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.UnitPrice.ToString("N2"))
+                            .Distinct()
+                            .ToArray();
+
+                        var taxes = movements_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.Tax.TaxCode)
+                            .Distinct()
+                            .ToArray();
+
+                        if (prices != null && prices.Length > 0)
+                            p.Prices = prices.Aggregate((i, j) => i + " | " + j);
+
+                        if (taxes != null && taxes.Length > 0)
+                            p.Taxes = taxes.Aggregate((i, j) => i + " | " + j);
+                    }
+                }
+
+                var working_lines = OpenedFileInstance.Instance.SaftFile?.SourceDocuments?.WorkingDocuments?.WorkDocument?.SelectMany(i => i.Line);
+                if (working_lines != null)
+                {
+                    foreach (var p in productsBack)
+                    {
+                        var prices = working_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.UnitPrice.ToString("N2"))
+                            .Distinct()
+                            .ToArray();
+
+                        var taxes = working_lines.Where(l => l.ProductCode.Equals(p.ProductCode, System.StringComparison.OrdinalIgnoreCase))
+                            .Select(l => l.Tax.TaxCode)
+                            .Distinct()
+                            .ToArray();
+
+                        if (prices != null && prices.Length > 0)
+                            p.Prices = prices.Aggregate((i, j) => i + " | " + j);
+
+                        if (taxes != null && taxes.Length > 0)
+                            p.Taxes = taxes.Aggregate((i, j) => i + " | " + j);
+                    }
+                }
+            }
 
             Products = productsBack;
             messageService.CloseDialog();

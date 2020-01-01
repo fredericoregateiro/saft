@@ -18,18 +18,18 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataCodeTagCheckStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
+                    <Path Style="{StaticResource DataCodeTagCheckStyle}" Height="140" Width="140" Margin="5" Fill="DodgerBlue"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
-						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">SAFT PT</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0" Foreground="White">SAFT PT</TextBlock>
 
-						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar SAFT v1.04_01</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center">Validar SAFT v1.04_01</TextBlock>
 						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
 					</StackPanel>
 
 					<Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 0 8 0"/>
 
 					<StackPanel Grid.Row="3">
-						<Button Command="{Binding OpenSaftFileCommand}" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Margin="8 4 8 8">Escolher ficheiro</Button>
+                        <Button Command="{Binding OpenSaftFileCommand}" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Margin="8 4 8 8">Escolher ficheiro</Button>
 					</StackPanel>
 				</Grid>
 			</materialDesign:Card>
@@ -42,11 +42,11 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataDatabaseStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
+                    <Path Style="{StaticResource DataDatabaseStyle}" Height="140" Width="140" Margin="5" Fill="DodgerBlue"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
-						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Existências</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0" Foreground="White">Existências</TextBlock>
 
-						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar o ficheiro de existências v1.02_1</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center">Validar o ficheiro de existências v1.02_1</TextBlock>
 					</StackPanel>
 
 					<Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 0 8 0"/>
@@ -65,11 +65,11 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-                    <Path Style="{StaticResource DataTruckFastStyle}" Height="140" Width="140" Margin="5" Fill="Black"/>
+                    <Path Style="{StaticResource DataTruckFastStyle}" Height="140" Width="140" Margin="5" Fill="DodgerBlue"/>
                     <StackPanel Grid.Row="1" Margin="8 24 8 4" >
-						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0">Transporte</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Foreground="White" Margin="0">Transporte</TextBlock>
 
-						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center">Validar SAFT para comunicação dos documentos de transporte.</TextBlock>
+						<TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center">Validar SAFT para comunicação dos documentos de transporte.</TextBlock>
 					</StackPanel>
 
 					<Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 0 8 0"/>

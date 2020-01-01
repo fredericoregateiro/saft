@@ -57,10 +57,12 @@
                 <sf:GroupColumnDescription ColumnName="ProductType" />
             </sf:SfDataGrid.GroupColumnDescriptions>
             <sf:SfDataGrid.Columns>
-                <sf:GridTextColumn HeaderText="Código" MappingName="ProductCode"/>
-                <sf:GridTextColumn HeaderText="Grupo" MappingName="ProductGroup" />
-                <sf:GridTextColumn HeaderText="Código barras" MappingName="ProductNumberCode" />
-                <sf:GridTextColumn HeaderText="Descrição" MappingName="ProductDescription" ColumnSizer="Star" />
+                <sf:GridTextColumn HeaderText="Código" MappingName="ProductCode" AllowResizing="True"/>
+                <sf:GridTextColumn HeaderText="Grupo" MappingName="ProductGroup" AllowResizing="True"/>
+                <sf:GridTextColumn HeaderText="Código barras" MappingName="ProductNumberCode" AllowResizing="True"/>
+                <sf:GridTextColumn HeaderText="Descrição" MappingName="ProductDescription" ColumnSizer="Star" AllowResizing="True"/>
+                <sf:GridTextColumn HeaderText="Preços" MappingName="Prices" ColumnSizer="Auto" AllowResizing="True"/>
+                <sf:GridTextColumn HeaderText="IVA" MappingName="Taxes" ColumnSizer="Auto" AllowResizing="True"/>
             </sf:SfDataGrid.Columns>
         </sf:SfDataGrid>
 

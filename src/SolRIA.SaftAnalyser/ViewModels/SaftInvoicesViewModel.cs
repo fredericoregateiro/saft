@@ -8,11 +8,9 @@ namespace SolRIA.SaftAnalyser.ViewModels
 {
     public class SaftInvoicesViewModel : BindableBase
     {
-        INavigationService navService;
-        IMessageService messageService;
+        readonly IMessageService messageService;
         public SaftInvoicesViewModel(INavigationService navService, IMessageService messageService)
         {
-            this.navService = navService;
             this.messageService = messageService;
 
             navService.LoadCompleted += NavService_LoadCompleted;
@@ -21,10 +19,17 @@ namespace SolRIA.SaftAnalyser.ViewModels
         private void NavService_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             if (OpenedFileInstance.Instance.SaftFile.SourceDocuments != null && OpenedFileInstance.Instance.SaftFile.SourceDocuments.SalesInvoices != null)
+            {
                 SalesInvoices = OpenedFileInstance.Instance.SaftFile.SourceDocuments.SalesInvoices;
 
-            FiltroDataInicio = new DateTime(DateTime.Now.Year, 1, 1);
-            FiltroDataFim = new DateTime(DateTime.Now.Year, 12, 31, 23, 59, 59);
+                FiltroDataInicio = OpenedFileInstance.Instance.SaftFile.Header.StartDate;
+                FiltroDataFim = OpenedFileInstance.Instance.SaftFile.Header.EndDate;
+            }
+            else
+            {
+                FiltroDataInicio = new DateTime(DateTime.Now.Year, 1, 1);
+                FiltroDataFim = new DateTime(DateTime.Now.Year, 12, 31, 23, 59, 59);
+            }
         }
 
         SourceDocumentsSalesInvoices salesInvoices;
@@ -239,7 +244,7 @@ namespace SolRIA.SaftAnalyser.ViewModels
             string[] invoiceNo = CurrentInvoice.InvoiceNo.Split('/');
             if (invoiceNo != null && invoiceNo.Length == 2)
             {
-                Int32.TryParse(invoiceNo[1], out int num);
+                int.TryParse(invoiceNo[1], out int num);
                 num = num - 1;
 
                 if (num > 0)

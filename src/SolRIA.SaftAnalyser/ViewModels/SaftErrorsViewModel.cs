@@ -8,8 +8,8 @@ namespace SolRIA.SaftAnalyser.ViewModels
 {
     public class SaftErrorsViewModel : BindableBase
     {
-        INavigationService navService;
-        IMessageService messageService;
+        readonly INavigationService navService;
+        readonly IMessageService messageService;
         public SaftErrorsViewModel(INavigationService navService, IMessageService messageService)
         {
             this.navService = navService;
